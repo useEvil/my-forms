@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+    <head>
+        <title>CM Release Tracking Tool</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <meta name="keywords" content="python web application tool" />
+        <meta name="description" content="pyramid web application" />
+        <link rel="shortcut icon" href="${request.static_url('myforms:static/images/favicon.ico')}" />
+        <link rel="stylesheet" href="${request.static_url('myforms:static/css/my-forms.css')}" type="text/css" media="screen" charset="utf-8" />
+        <link rel="stylesheet" href="${request.static_url('myforms:static/js/flexigrid/css/flexigrid/flexigrid.css')}" type="text/css" media="screen" charset="utf-8" />
+        <!--[if lte IE 6]>
+        <link rel="stylesheet" href="${request.static_url('myforms:static/ie6.css')}" type="text/css" media="screen" charset="utf-8" />
+        <![endif]-->
+    </head>
+    <body>
+        <!-- The dark background -->
+        <div class="background-cover">&nbsp;</div>
+        <div class="background-cover-top">&nbsp;</div>
+        <div id="overlay-box-loading" class="overlay-loading">
+            <p>Processing&nbsp;...&nbsp;Please Wait</p>
+        </div>
+        <div id="wrap">
+            <div id="top">
+                <div class="top align-center">
+                    <h1>CM Release Tracking Tool</h1>
+                </div>
+            </div>
+            <div id="middle">
+                <div id="placeholder" class="graph align-center"></div>
+                <table id="releases" style="display: none;"></table>
+            </div>
+            <div id="bottom">
+                <div class="bottom">
+                    <div id="overlay-box-login" class="overlay-box">
+                        <div class="overlay-content">
+                            <form id="login_form">
+                                <fieldset class="form">
+                                <legend id="title">Login</legend>
+                                <div class="wrapper">
+                                    <ul>
+                                        <li>
+                                            <label for="releaseLogin" id="releaseLoginLabel">Login</label>
+                                            <input type="text" class="input select-menu" id="releaseLogin" name="login" size="25" maxlength="100" tal:attributes="value id" />
+                                        </li>
+                                        <li>
+                                            <label for="releasePassword" id="releasePasswordLabel">Password</label>
+                                            <input type="password" class="input select-menu" id="releasePassword" name="password" size="25" maxlength="100" value="" />
+                                        </li>
+                                        <li class="add-remove">
+                                            <input type="button" style="width: 8em;" class="control input submit_button submit_login" id="submit_login" value=" Submit " />
+                                            <input type="button" style="width: 8em;" class="control input cancel_button cancel_login" id="cancel_login" value=" Cancel " />
+                                        </li>
+                                    </ul>
+                                </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="status-panel">
+                        <div id="app-status">
+                            <span>User ID:</span>
+                            <span id="status-ready" tal:content="id">&nbsp;</span>
+                            <span id="notifications">
+                                <img id="loading" src="/static/images/loading_bar.gif" alt="loading" />
+                                <span>Processing....Please Wait</span>
+                            </span>
+                            <span id="message" class="ui-widget"></span>
+                        </div>
+                        <div id="app-options">
+                            <ul>
+                                <li class="ignore" id="logout"><a href="/logout">Exit Tool</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+          <div class="footer">&copy; Copyright 2011, Shopzilla, Inc.</div>
+        </div>
+    </body>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/my-forms.js"></script>
+    <script type="text/javascript" src="/static/js/flexigrid/flexigrid.js"></script>
+    <script type="text/javascript" src="/static/js/flot/jquery.flot.min.js"></script>
+    <!--script type="text/javascript" src="/js/my-forms.js"></script-->
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                if ($('a.closeEl')) $('a.closeEl').bind('click', toggleContent);
+                var timecolwidth = 110;
+                var releaseGrid = $("#releases").flexigrid({
+                    url: '/REST/release/reporting',
+                    method: 'GET',
+                    dataType: 'json',
+                    colModel: [
+                        {display: 'ID&nbsp;<input type="radio" name="y-axis" value="id" class="select_y_axis" />', name: 'id', width: 70, sortable: false, align: 'center'},
+                        {display: 'Project&nbsp;<input type="radio" name="y-axis" value="id" class="select_y_axis" />', name: 'project', width: 200, sortable: false, align: 'left'},
+                        {display: 'Environment&nbsp;<input type="radio" name="y-axis" value="id" class="select_y_axis" />', name: 'environment', width: 100, sortable: false, align: 'center'},
+                        {display: 'Date Created&nbsp;<input type="radio" name="y-axis" value="id" class="select_y_axis" />', name: 'createdDate', width: 150, sortable: false, align: 'center'},
+                        {display: 'Requestd By&nbsp;<input type="radio" name="y-axis" value="id" class="select_y_axis" />', name: 'createdBy', width: 100, sortable: false, align: 'center'},
+                        {display: 'Type&nbsp;<input type="radio" name="y-axis" value="id" class="select_y_axis" />', name: 'type', width: 50, sortable: false, align: 'center'},
+                        {display: 'Status&nbsp;<input type="radio" name="y-axis" value="id" class="select_y_axis" />', name: 'status', width: 50, sortable: false, align: 'center'},
+//                        {display: '', name: 'icons', width: 75, sortable: false, align: 'center'},
+                    ],
+                    buttons: [
+                        {name: 'Add', bclass: 'add', onpress : showCreatePage},
+                        {separator: true},
+                        {name: 'Listing', bclass: 'listing', onpress : showListing},
+                        {separator: true},
+                        {name: 'Login', bclass: 'login', onpress : showLoginForm, icon: 'chart_pie.png'},
+                        {separator: true}
+                    ],
+                    searchitems: [
+                        {display: 'Status', name : 'releaseStatus', isdefault: true},
+                        {display: 'Environment', name : 'releaseEnvironment', isdefault: false},
+                        {display: 'Project', name : 'releaseProject', isdefault: false},
+                        {display: 'ID', name : 'id', isdefault: false},
+                    ],
+                    sortname: 'createdDate',
+                    sortorder: 'desc',
+                    usepager: true,
+                    title: 'Release Items',
+                    useRp: true,
+                    rp: 30,
+                    rpOptions: [15,30,45,60],
+                    showTableToggleBtn: false,
+                    showToggleBtn: false,
+                    width: $(window).width()-28,
+                    height: $(window).height()-500,
+                    singleSelect: true,
+                    resizable: false,
+                });
+                var options = {
+                    lines:  { show: true },
+                    points: { show: true },
+                    xaxis:  { tickDecimals: 0, tickSize: 1 },
+                    grid:   {
+                        backgroundColor: '#ffffff',
+                        borderWidth: 3,
+                        borderColor: 'black',
+                        minBorderMargin: 20,
+                        hoverable: true,
+                      }
+                };
+                var data = [ ];
+                var placeholder = $("#placeholder");
+                $.plot(placeholder, data, options);
+                var alreadyFetched = { };
+                function onDataReceived(series) {
+                    var firstcoordinate = '(' + series.data[0][0] + ', ' + series.data[0][1] + ')';
+                    if (!alreadyFetched[series.label]) {
+                        alreadyFetched[series.label] = true;
+                        data.push(series);
+                    }
+                    $.plot(placeholder, data, options);
+                 }
+                $.ajax({
+                    url: '/REST/release/reports/date/project',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: onDataReceived
+                });
+            });
+        var resizeTimer;
+        $(window).resize(function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                $(".flexigrid").width($(window).width()-40);
+                $("#release").width($(".flexigrid").width()-17);
+                $(".hDivBox table").width($(".hDiv").width()-15);
+                $(".bDiv").height($(window).height()-325);
+            }, 50);
+        });
+    </script>
+</html>
