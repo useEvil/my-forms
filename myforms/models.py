@@ -94,7 +94,7 @@ class HundredPushups(Base):
         if filter:
             for word in filter.split():
                 query = query.filter(getattr(Message, type).ilike("%%%s%%" % word))
-        return query.filter(self.__class__.createdDate>=startDate).filter(self.__class__.createdDate<=endDate).order_by(asc(self.__class__.createdDate)).all()
+        return query.filter(self.__class__.createdDate>=startDate).filter(self.__class__.createdDate<=endDate).order_by(desc(self.__class__.createdDate), desc(self.__class__.id)).all()
 
     def getAll(self):
         results = DBSession().query(self.__class__).all()
@@ -106,14 +106,14 @@ class HundredPushups(Base):
             for word in filter.split():
                 query = query.filter(getattr(Release, type).ilike("%%%s%%" % word))
         try:
-            list = query.order_by(asc(self.__class__.createdDate)).all()
+            list = query.order_by(desc(self.__class__.createdDate), desc(self.__class__.id)).all()
         except NoResultFound:
             list = [ ]
         return list
 
     def getRecent(self):
         try:
-            result = DBSession().query(self.__class__).order_by(desc(self.__class__.createdDate)).limit(1).offset(0).one()
+            result = DBSession().query(self.__class__).order_by(desc(self.__class__.createdDate), desc(self.__class__.id)).limit(1).offset(0).one()
         except:
             result = DBSession()
             result.week  = 0
@@ -130,17 +130,28 @@ class HundredPushups(Base):
         return result
 
     def getSet(self, limit=10, offset=0):
-        return DBSession().query(self.__class__).order_by(desc(self.__class__.createdDate)).limit(limit).offset(offset).all()
+        return DBSession().query(self.__class__).order_by(desc(self.__class__.createdDate), desc(self.__class__.id)).limit(limit).offset(offset).all()
 
     def getTotal(self):
         return DBSession().query(self.__class__).count()
 
     def setParams(self, params):
         for attr in params.keys():
-            value = params.get(attr)
+            if attr == 'createdDate':
+                value = date.datetime.strptime(params.get(attr), getSettings('date.short'))
+            else:
+                value = params.get(attr)
             if value: setattr(self, attr, value)
         if not self.createdDate:
             self.createdDate = date.datetime.today()
+
+    def create(self, params):
+        self.setParams(params)
+        session = DBSession()
+        session.add(self)
+        session.flush()
+        transaction.commit()
+        return
 
     def update(self, params):
         self.setParams(params)
@@ -149,10 +160,9 @@ class HundredPushups(Base):
         transaction.commit()
         return
 
-    def create(self, params):
-        self.setParams(params)
+    def delete(self):
         session = DBSession()
-        session.add(self)
+        session.delete(self)
         session.flush()
         transaction.commit()
         return

@@ -36,96 +36,37 @@
             </div>
             <div id="bottom">
                 <div class="bottom">
-                    <div id="overlay-box-create" class="overlay-box">
+                    <div id="overlay-box-entry" class="overlay-box">
                         <div class="overlay-content">
-                            <form id="create_form">
+                            <form id="entry_form">
                                 <fieldset class="form">
-                                <legend id="title">Add</legend>
+                                <legend id="title">{Add|Edit|View}</legend>
                                 <div class="wrapper">
                                     <ul>
-                                        <li>
-                                            <label for="pushupsWeek" id="pushupsWeekLabel">Week</label>
-                                            <select  class="input select-menu" id="pushupsWeek" name="week">
-                                                <option tal:repeat="n [0,1,2,3,4,5,6,7,8]" tal:content="n" tal:attributes="value n" selected="${recent.set1 == n and 'selected' or None}"></option>
-                                            </select>
+                                        <li class="edit-form view-form">
+                                            <label for="pushupsID" id="pushupsIDLabel">ID</label>
+                                            <input type="text" id="pushupsID" name="id" value="" readonly="readonly" />
                                         </li>
-                                        <li>
-                                            <label for="pushupsDay" id="pushupsDayLabel">Day</label>
-                                            <select  class="input select-menu" id="pushupsDay" name="day">
-                                                <option tal:repeat="n [0,1,2,3]" tal:content="n" tal:attributes="value n" selected="${recent.day == n and 'selected' or None}"></option>
-                                            </select>
-                                        </li>
-                                        <li>
-                                            <label for="pushupsLevel" id="pushupsLevelLabel">Level</label>
-                                            <select  class="input select-menu" id="pushupsLevel" name="level">
-                                                <option tal:repeat="n [0,1,2,3,4,5,6,7,8,9,10]" tal:content="n" tal:attributes="value n" selected="${recent.level == n and 'selected' or None}"></option>
-                                            </select>
-                                        </li>
-                                        <li>
-                                            <label for="pushupsSet1" id="pushupsSet1Label">Set 1</label>
-                                            <input type="text" class="input select-menu" id="pushupsSet1" name="set1" size="5" maxlength="5" tal:attributes="value recent.set1" />
-                                        </li>
-                                        <li>
-                                            <label for="pushupsSet2" id="pushupsSet2Label">Set 2</label>
-                                            <input type="text" class="input select-menu" id="pushupsSet2" name="set2" size="5" maxlength="5" tal:attributes="value recent.set2" />
-                                        </li>
-                                        <li>
-                                            <label for="pushupsSet3" id="pushupsSet3Label">Set 3</label>
-                                            <input type="text" class="input select-menu" id="pushupsSet3" name="set3" size="5" maxlength="5" tal:attributes="value recent.set3" />
-                                        </li>
-                                        <li>
-                                            <label for="pushupsSet4" id="pushupsSet4Label">Set 4</label>
-                                            <input type="text" class="input select-menu" id="pushupsSet4" name="set4" size="5" maxlength="5" tal:attributes="value recent.set4" />
-                                        </li>
-                                        <li>
-                                            <label for="pushupsExhaust" id="pushupsExhaustLabel">Exhaust</label>
-                                            <input type="text" class="input select-menu" id="pushupsExhaust" name="exhaust" size="5" maxlength="5" tal:attributes="value recent.exhaust" />
-                                        </li>
-                                        <li>
-                                            <label for="pushupsHashtags" id="pushupsHashtagsLabel">HashTags</label>
-                                            <input type="text" class="input" id="pushupsHashtags" name="hashtags" size="100" maxlength="2000" tal:attributes="value recent.hashtags" />
-                                        </li>
-                                        <li>
-                                            <label for="pushupsMentions" id="pushupsMentionsLabel">Mentions</label>
-                                            <input type="text" class="input" id="pushupsMentions" name="mentions" size="100" maxlength="2000" tal:attributes="value recent.mentions" />
-                                        </li>
-                                        <li class="add-remove">
-                                            <input type="button" style="width: 8em;" class="control input submit_button submit_create" id="submit_create" value=" Submit " />
-                                            <input type="button" style="width: 8em;" class="control input cancel_button cancel_create" id="cancel_create" value=" Cancel " />
-                                        </li>
-                                    </ul>
-                                </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                    <div id="overlay-box-editview" class="overlay-box">
-                        <div class="overlay-content">
-                            <form id="editview_form">
-                                <fieldset class="form">
-                                <legend id="title">{Edit|View}</legend>
-                                <div class="wrapper">
-                                    <ul>
-                                        <li>
+                                        <li class="edit-form view-form">
                                             <label for="pushupsCreatedDate" id="pushupsCreatedDateLabel">Created Date</label>
-                                            <input type="text" id="pushupsCreatedDate" name="createdDate" value="" tal:attributes="value recent.createdDate.strftime(h.getSettings('date.short'))" readonly="readonly" />
+                                            <input type="text" id="pushupsCreatedDate" name="createdDate" value="" />
                                         </li>
                                         <li>
                                             <label for="pushupsWeek" id="pushupsWeekLabel">Week</label>
                                             <select  class="input select-menu" id="pushupsWeek" name="week">
-                                                <option tal:repeat="n [0,1,2,3,4,5,6,7,8]" tal:content="n" tal:attributes="value n" selected="${recent.set1 == n and 'selected' or None}"></option>
+                                                <option class="value" tal:repeat="n [0,1,2,3,4,5,6,7,8]" tal:content="n" tal:attributes="value n" selected="${recent.week == n and 'selected' or None}"></option>
                                             </select>
                                         </li>
                                         <li>
                                             <label for="pushupsDay" id="pushupsDayLabel">Day</label>
                                             <select  class="input select-menu" id="pushupsDay" name="day">
-                                                <option tal:repeat="n [0,1,2,3]" tal:content="n" tal:attributes="value n" selected="${recent.day == n and 'selected' or None}"></option>
+                                                <option class="value" tal:repeat="n [0,1,2,3]" tal:content="n" tal:attributes="value n" selected="${recent.day == n and 'selected' or None}"></option>
                                             </select>
                                         </li>
                                         <li>
                                             <label for="pushupsLevel" id="pushupsLevelLabel">Level</label>
                                             <select  class="input select-menu" id="pushupsLevel" name="level">
-                                                <option tal:repeat="n [0,1,2,3,4,5,6,7,8,9,10]" tal:content="n" tal:attributes="value n" selected="${recent.level == n and 'selected' or None}"></option>
+                                                <option class="value" tal:repeat="n [0,1,2,3,4,5,6,7,8,9,10]" tal:content="n" tal:attributes="value n" selected="${recent.level == n and 'selected' or None}"></option>
                                             </select>
                                         </li>
                                         <li>
@@ -156,9 +97,16 @@
                                             <label for="pushupsMentions" id="pushupsMentionsLabel">Mentions</label>
                                             <input type="text" class="input" id="pushupsMentions" name="mentions" size="100" maxlength="2000" tal:attributes="value recent.mentions" />
                                         </li>
-                                        <li class="add-remove">
-                                            <input type="button" style="width: 8em;" class="control input submit_button submit_create" id="submit_create" value=" Submit " />
-                                            <input type="button" style="width: 8em;" class="control input cancel_button cancel_create" id="cancel_create" value=" Cancel " />
+                                        <li class="create-form">
+                                            <input type="button" style="width: 8em;" class="control input submit_button" id="submit_entry_create" value=" Submit " />
+                                            <input type="button" style="width: 8em;" class="control input cancel_button" id="cancel_entry_create" value=" Cancel " />
+                                        </li>
+                                        <li class="edit-form">
+                                            <input type="button" style="width: 8em;" class="control input submit_button" id="submit_entry_edit" value=" Submit " />
+                                            <input type="button" style="width: 8em;" class="control input cancel_button" id="cancel_entry_edit" value=" Cancel " />
+                                        </li>
+                                        <li class="view-form">
+                                            <input type="button" style="width: 8em;" class="control input cancel_button" id="cancel_entry_view" value=" Cancel " />
                                         </li>
                                     </ul>
                                 </div>
@@ -216,12 +164,13 @@
                         {display: 'Exhaust', name: 'exhaust', width: 50, sortable: false, align: 'left'},
                         {display: 'Total', name: 'total', width: 50, sortable: false, align: 'left'},
                         {display: 'Created On', name: 'created', width: 150, sortable: false, align: 'center'},
+                        {display: '', name: '', width: 50, sortable: false, align: 'center'},
                     ],
                     buttons: [
-                        {name: 'New', bclass: 'add', onpress : showCreateForm},
+                        {name: 'New', bclass: 'add', onpress : showEntryForm},
                         {separator: true},
-                        {name: 'Reports', bclass: 'reports', onpress : showReports},
-                        {separator: true}
+                        {name: 'Reload', bclass: 'reload', onpress: reloadPage},
+                        {separator: true},
                     ],
                     searchitems: [
                         {display: 'Hashtags', name : 'hashtags', isdefault: false},

@@ -8,9 +8,12 @@ var dLong   = 'yyyy-M-d HH:mm:ss';
 var dShort  = 'yyyy-M-d';
 
 /* Events */
-$('.submit_create').live('click', submitCreateForm);
-$('.cancel_create').live('click', cancelForm);
+$('.submit_button').live('click', submitEntryForm);
+$('.cancel_button').live('click', cancelForm);
 $('.cancel_login').live('click', cancelForm);
+$('.edit_entry').live('click', showViewEntry);
+$('.view_entry').live('click', showViewEntry);
+$('.delete_entry').live('click', deleteEntry);
 
 
 /* Binds */
@@ -154,72 +157,79 @@ function cancelOverlay(e) {
         }
         formID  = '';
     }
-}
-
-function cancelEditForm(event, id) {
-    var element = id ? id : this.id;
-    var display = element.replace('cancel_', '');
-    $('#'+display+'_form').find('input').each(function(){
-        if ($(this).attr('type') == 'text') $(this).attr('value', '');
-        if ($(this).attr('type') == 'checkbox') $(this).attr('checked', false);
-        if ($(this).attr('type') == 'radio') $(this).attr('checked', false);
-    });
-    $('#'+display+'_form').find('textarea').each(function(){
-        $(this).attr('value', '');
-    });
-    $('#'+display+'_form').find('select').each(function(){
-        $(this).children().each(function(){
-            if ($(this).val() == 0) {
-                $(this).attr('selected', true);
-            } else {
-                $(this).attr('selected', false);
-            }
-        });
-    });
-    $('#'+display+'_form').find('label').each(function(){
-        $(this).css('color', '#000000');
-    });
-    $('#'+display+'_form').hide();
-    doOverlayClose(display);
+    clearForm(formID);
 }
 
 function cancelForm(event, id) {
-    var classId = id ? id : this.id;
-    var parts   = classId.split('_');
+    var thisId  = id ? id : this.id;
+    var parts   = thisId.split('_');
     var display = parts[1];
+    $('#'+display+'_form').find('input').each(function(){
+        if ($(this).attr('type') == 'text') {
+            $(this).attr('value', '');
+        }
+    });
+
+
     doOverlayClose(display);
 }
 
-function submitCreateForm(event, id) {
-    var classId = id ? id : this.id;
-    var parts   = classId.split('_');
+function submitEntryForm(event, id) {
+    var thisId  = id ? id : this.id;
+    var parts   = thisId.split('_');
     var display = parts[1];
+    var action  = parts[2];
+    formID      = display
     if (validateForm(display, id)) {
         return false;
     }
-    var params  = $('#'+display+'_form').serialize();
-    doOverlayOpen('loading');
+    if (action == 'edit') {
+        action += '/'+$('#pushupsID').val();
+    }
+    var params  = $('#entry_form').serialize();
     $.ajax(
         {
-            url: '/REST/forms/create',
+            url: '/REST/forms/'+action,
             type: 'post',
             data: params,
             timeout: 10000,
-            error: failedCreateForm,
-            success: updateCreateForm,
+            error: failedEntryForm,
+            success: updateEntryForm,
         }
     );
 }
 
-function showCreateForm(event) {
-    doOverlayOpen('create');
+function showEntryForm(event) {
+    $('#title').html('Create');
+    $('.edit-form').hide();
+    $('.view-form').hide();
+    formID      = 'entry'
+    doOverlayOpen(formID);
 }
 
-function showLoginForm(event) {
-    doOverlayOpen('login');
+function showViewEntry(event) {
+    //alert("showObjectDetails ");
+    var classes = $(this).attr('class').split(' ');
+    var parts   = this.id.split('_');
+    var action  = parts[0];
+    var id      = parts[1];
+    formID      = 'entry';
+    $.getJSON('/REST/forms/view/'+id, populateForm);
+    if (action == 'edit') {
+        $('#title').html('Edit');
+        $('.view-form').hide();
+        $('.create-form').hide();
+        $('.edit-form').show();
+    } else {
+        $('#title').html('View');
+        $('.edit-form').hide();
+        $('.create-form').hide();
+        $('.view-form').show();
+    }
+    doOverlayOpen('entry');
 }
 
-function showListing(event) {
+function showIndexPage(event) {
     window.location.href = '/';
 }
 
@@ -227,101 +237,27 @@ function showReports(event) {
     window.location.href = '/reports';
 }
 
-function failedCreateForm(data) {
+function reloadPage() {
+    window.location.reload();
+}
+
+function deleteEntry(event) {
+    var thisId = id ? id : this.id;
+    var parts  = thisId.split('_');
+    var id     = parts[1];
+    $.getJSON('/REST/forms/delete/'+id, updateEntryForm);
+}
+
+function failedEntryForm(data) {
     if (data['status'] == 500) data['message'] = data['status'] + ': ' + data['statusText'];
-    doOverlayClose('loading', 25);
-    $('#releaseStatus').attr('disabled', true);
     updateStatus(data);
 }
 
-function failedLoginForm(data) {
-    if (data['status'] == 500) data['message'] = data['status'] + ': ' + data['statusText'];
-    doOverlayClose('login');
-    updateStatus(data);
-}
-
-function updateCreateForm(data) {
-    doOverlayClose('loading');
+function updateEntryForm(data) {
+    doOverlayClose('entry');
     updateStatus(data);
     if (data['status'] != 200) return;
     window.location.replace('/');
-}
-
-function updateLoginForm(data) {
-    doOverlayClose('loading', 25);
-    doOverlayClose('login');
-    updateStatus(data);
-    $('#login_form').find('input').each(function(){
-        if ($(this).attr('type') == 'password') this.value = '';
-    });
-    if (data['status'] != 200) return;
-}
-
-function updateApproveStatus(data) {
-    doOverlayClose('loading');
-    updateStatus(data);
-    if (data['status'] != 200) return;
-    $('#approvedBy').attr('value', data['userId']);
-    $('#approvedBy').show();
-    $('#approve_release').hide();
-}
-
-function updateApproveStatusList(data) {
-    doOverlayClose('loading');
-    updateStatus(data);
-    if (data['status'] != 200) return;
-    window.location.replace('/');
-}
-
-function updateProjectList(data) {
-    doOverlayClose('loading');
-    var varId = $('#releaseProject');
-    varId.children().each(function(){
-        $(this).remove();
-    });
-    for (key in data) {
-        var option = new Option(data[key], data[key]);
-        varId.append(option);
-    }
-}
-
-function updateEnvironmentList(data) {
-    doOverlayClose('loading');
-    var varId = $('#releaseDeployable');
-    varId.children().each(function(){
-        $(this).remove();
-    });
-    for (key in data) {
-        var option = new Option(data[key], data[key]);
-        varId.append(option);
-    }
-}
-
-function updateBuildList(data) {
-    doOverlayClose('loading');
-    var varId = $('#releaseVersion');
-    varId.children().each(function(){
-        $(this).remove();
-    });
-    for (key in data) {
-        var build  = data[key].join('-');
-        var option = new Option(build, build);
-        varId.append(option);
-    }
-    updateRollbackList(data);
-}
-
-function updateRollbackList(data) {
-    doOverlayClose('loading');
-    var varId = $('#releaseRollback');
-    varId.children().each(function(){
-        $(this).remove();
-    });
-    for (key in data) {
-        var build  = data[key].join('-');
-        var option = new Option(build, build);
-        varId.append(option);
-    }
 }
 
 function updateStatus(data) {
@@ -337,8 +273,19 @@ function updateStatus(data) {
     clearMessage();
 }
 
-function logMeIn(data) {
-    alert('logMeIn');
+function populateForm(data) {
+    $('#pushupsID').val(data['entry']['id']);
+    $('#pushupsCreatedDate').val(data['entry']['createdDate']);
+    $('#pushupsSet1').val(data['entry']['set1']);
+    $('#pushupsSet2').val(data['entry']['set2']);
+    $('#pushupsSet3').val(data['entry']['set3']);
+    $('#pushupsSet4').val(data['entry']['set4']);
+    $('#pushupsExhaust').val(data['entry']['exhaust']);
+    $('#pushupsHashtags').val(data['entry']['hashtag']);
+    $('#pushupsMentions').val(data['entry']['mentions']);
+    $('#pushupsWeek').val(data['entry']['week']);
+    $('#pushupsDay').val(data['entry']['day']);
+    $('#pushupsLevel').val(data['entry']['level']);
 }
 
 function validateForm(object, id) {

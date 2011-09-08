@@ -732,6 +732,16 @@
 			background: url(images/login.png) no-repeat center left;
 		}
 
+	.flexigrid div.fbutton .reset
+		{
+			background: url(images/arrow_rotate_anticlockwise.png) no-repeat center left;
+		}
+
+	.flexigrid div.fbutton .reload
+		{
+			background: url(images/arrow_rotate_clockwise.png) no-repeat center left;
+		}
+
 	.flexigrid .pChangeRange
 		{
 		background: url(images/calendar.png) no-repeat center;

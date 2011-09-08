@@ -40,7 +40,7 @@ def listing(request):
     result['page']  = currentPage
     result['total'] = total
     for item in page.items:
-        row = {'id': item.id, 'cell': ['<a style="color: blue;text-decoration: underline;" href="/view/%s" class="pushups" id="view_%s" title="View">%s</a>'%(item.id, item.id, item.id)]}
+        row = {'id': item.id, 'cell': ['<a style="color: blue;text-decoration: underline;" href="#" class="pushups view_entry" id="view_%s" title="View">%s</a>'%(item.id, item.id)]}
         row['cell'].append(item.week)
         row['cell'].append(item.day)
         row['cell'].append(item.level)
@@ -51,6 +51,7 @@ def listing(request):
         row['cell'].append(item.exhaust)
         row['cell'].append(item.set1+item.set2+item.set3+item.set4+item.exhaust)
         row['cell'].append(item.createdDate.strftime(getSettings('date.long')))
+        row['cell'].append('<img class="pushups edit_entry" alt="Edit Entry" title="Edit Entry" src="/static/images/edit.png" id="edit_%s" />&nbsp;<img class="pushups delete_entry" alt="Delete Entry" title="Delete Entry" src="/static/images/delete.png" id="delete_%s" />'%(item.id, item.id))
         result['rows'].append(row)
     return result
 
@@ -105,30 +106,53 @@ def create(request):
         return { 'status': 404, 'message': 'Failed to Create Entry' }
     return { 'status': 200, 'message': 'Successfully Created Entry' }
 
-def approve(request):
-    userId = getUser(request.session, 'id')
+def view(request):
+    id = request.matchdict['id']
     try:
-        if not request.matchdict.has_key('id'): return
-        release = Release().getById(request.matchdict['id'])
-        release.approve(userId)
-        RT().approve(release.rt, userId)
+        entry = HundredPushups().getById(id)
     except:
-        return { 'status': 404, 'message': 'Failed to Approve Release Ticket' }
-    return { 'status': 200, 'message': 'Successfully Approved Release Ticket', 'userId': userId }
+        return { 'status': 404, 'message': 'Failed to Get Entry' }
+    return { 'status': 200, 'entry': _jsonify_data(entry) }
 
-def resolve(request):
-    userId = getUser(request.session, 'id')
+def edit(request):
+    id     = request.matchdict['id']
+    params = request.params
     try:
-        if not request.matchdict.has_key('id'): return
-        release = Release().getById(request.matchdict['id'])
-        release.resolve(userId)
-        RT().resolve(release.rt, userId)
+        entry = HundredPushups().getById(id)
+        entry.update(params)
     except:
-        return { 'status': 404, 'message': 'Failed to Resolve Release Ticket' }
-    return { 'status': 200, 'message': 'Successfully Resolve Release Ticket', 'userId': userId }
+        return { 'status': 404, 'message': 'Failed to Edit Entry' }
+    return { 'status': 200, 'message': 'Successfully Edit Entry' }
+
+def delete(request):
+    id = request.matchdict['id']
+    try:
+        entry = HundredPushups().getById(id)
+        entry.delete()
+    except:
+        return { 'status': 404, 'message': 'Failed to Delete Entry' }
+    return { 'status': 200, 'message': 'Successfully Delete Entry' }
 
 def error(request):
     return { 'status': request.matchdict['id'], 'message': 'You Do Not have permissions to Approve Release Ticket' }
+
+def _jsonify_data(data):
+    hash = {
+        'id': data.id,
+        'week': data.week,
+        'day': data.day,
+        'level': data.level,
+        'set1': data.set1,
+        'set2': data.set2,
+        'set3': data.set3,
+        'set4': data.set4,
+        'exhaust': data.exhaust,
+        'hashtag': data.hashtags,
+        'mentions': data.mentions,
+        'permalink': data.permalink,
+        'createdDate': data.createdDate.strftime(getSettings('date.short')),
+    }
+    return hash
 
 def _message_sql_query(params=None):
     start   = params.get('start')
