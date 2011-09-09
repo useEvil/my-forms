@@ -64,6 +64,7 @@ class HundredPushups(Base):
         HASHTAGS        VARCHAR2(2000) NULL,
         MENTIONS        VARCHAR2(2000) NULL,
         PERMALINK       VARCHAR2(2000) NULL,
+        MESSAGE         VARCHAR2(2000) NULL,
         CREATED_DATE    DATE DEFAULT CURRENT_TIMESTAMP NOT NULL,
         CONSTRAINT PK_RELEASE_TYPE PRIMARY KEY (ID)
     );
@@ -82,6 +83,7 @@ class HundredPushups(Base):
     hashtags    = Column('HASHTAGS', Unicode(2000), nullable=True)
     mentions    = Column('MENTIONS', Unicode(2000), nullable=True)
     permalink   = Column('PERMALINK', Unicode(2000), nullable=False)
+    message     = Column('MESSAGE', Unicode(2000), nullable=False)
     createdDate = Column('CREATED_DATE', DateTime, nullable=False)
 
     def getById(self, id=None):
@@ -126,6 +128,7 @@ class HundredPushups(Base):
             result.exhaust   = 0
             result.mentions  = None
             result.permalink = None
+            result.message   = None
             result.hashtags  = '#100Pushups'
         return result
 
@@ -137,34 +140,31 @@ class HundredPushups(Base):
 
     def setParams(self, params):
         for attr in params.keys():
-            if attr == 'createdDate':
-                value = date.datetime.strptime(params.get(attr), getSettings('date.short'))
+            value = params.get(attr)
+            if attr == 'createdDate' and value:
+                value = date.datetime.strptime(value, getSettings('date.short'))
             else:
-                value = params.get(attr)
-            if value: setattr(self, attr, value)
+                if value: setattr(self, attr, value)
         if not self.createdDate:
             self.createdDate = date.datetime.today()
+
+    def total(self):
+        return int(self.set1)+int(self.set2)+int(self.set3)+int(self.set4)+int(self.exhaust)
 
     def create(self, params):
         self.setParams(params)
         session = DBSession()
         session.add(self)
-        session.flush()
-        transaction.commit()
         return
 
     def update(self, params):
         self.setParams(params)
         session = DBSession()
-        session.flush()
-        transaction.commit()
         return
 
     def delete(self):
         session = DBSession()
         session.delete(self)
-        session.flush()
-        transaction.commit()
         return
 
 

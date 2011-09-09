@@ -1,0 +1,8 @@
+#status-panel { background: #e6e6e6;height: 30px;width: 100%;position: fixed;z-index: 199;top: 0px;left: 0px;border: 3px solid #373839;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px; }
+#app-status { float: left;height: 20px;width: 20%; }
+
+.input { padding: 0.1em;width: 10em;border: 1px solid #ddd;background: #fafafa;font: bold 0.95em arial, sans-serif;-moz-border-radius: 0.4em;-khtml-border-radius: 0.4em;-webkit-text-size-adjust: 140%; }
+.select-menu { width: 9em; }
+
+label { float: left;width: 7em;text-align: right;margin-right: 1em; }
+form  { background: #fff;padding: 0.1em;border: 1px solid #eee;margin: 0.1em;width: 22em;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; }

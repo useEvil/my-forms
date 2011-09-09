@@ -40,6 +40,10 @@ def index(request):
         start, end = h.getStartEnd(start, end)
     return { 'h': h, 'start': start, 'end': end, 'type': type, 'range': range, 'recent': recent }
 
+def iphone(request):
+    recent = HundredPushups().getRecent()
+    return { 'h': h, 'recent': recent }
+
 def reports(request):
     return { 'h': h }
 

@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+    <head>
+        <title>My Forms Tool</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <meta name="keywords" content="python web application tool" />
+        <meta name="description" content="pyramid web application" />
+        <meta name="viewport" content="width=device-width,user-scalable=no" />
+        <link rel="shortcut icon" href="${request.static_url('myforms:static/images/favicon.ico')}" />
+        <link rel="stylesheet" href="${request.static_url('myforms:static/css/my-forms.css')}" type="text/css" media="screen" charset="utf-8" />
+        <link rel="stylesheet" href="${request.static_url('myforms:static/css/my-forms-iphone.css')}" type="text/css" media="screen" charset="utf-8" />
+        <link rel="stylesheet" href="${request.static_url('myforms:static/css/ui-lightness/jquery-ui.css')}" type="text/css" media="screen" charset="utf-8" />
+        <link rel="stylesheet" href="${request.static_url('myforms:static/css/ui.daterangepicker.css')}" type="text/css" media="screen" charset="utf-8" />
+        <link rel="stylesheet" href="${request.static_url('myforms:static/js/flexigrid/css/flexigrid/flexigrid.css')}" type="text/css" media="screen" charset="utf-8" />
+        <!--[if lte IE 6]>
+        <link rel="stylesheet" href="${request.static_url('myforms:static/ie6.css')}" type="text/css" media="screen" charset="utf-8" />
+        <![endif]-->
+        
+    </head>
+    <body>
+        <!-- The dark background -->
+        <div class="background-cover">&nbsp;</div>
+        <div class="background-cover-top">&nbsp;</div>
+        <div id="overlay-box-loading" class="overlay-loading">
+            <p>Processing&nbsp;...&nbsp;Please Wait</p>
+        </div>
+        <div id="wrap">
+            <div id="top">
+                <div class="top align-center">
+                    <h1>My Forms Tool</h1>
+                </div>
+            </div>
+            <div id="middle">
+                <table id="updates" class="hidden"></table>
+            </div>
+            <div id="bottom">
+                <form id="entry_form" class="hidden">
+                    <fieldset class="form">
+                    <legend id="title">{Add|Edit|View}</legend>
+                    <div class="wrapper">
+                        <ul>
+                            <li class="edit-form view-form">
+                                <label for="pushupsID" id="pushupsIDLabel">ID</label>
+                                <input type="text" class="input select-menu" id="pushupsID" name="id" value="" readonly="readonly" />
+                            </li>
+                            <li class="edit-form view-form">
+                                <label for="pushupsCreatedDate" id="pushupsCreatedDateLabel">Created Date</label>
+                                <input type="text" class="input select-menu" id="pushupsCreatedDate" name="createdDate" value="" />
+                            </li>
+                            <li>
+                                <label for="pushupsWeek" id="pushupsWeekLabel">Week</label>
+                                <select  class="input select-menu" id="pushupsWeek" name="week">
+                                    <option class="value" tal:repeat="n [0,1,2,3,4,5,6,7,8]" tal:content="n" tal:attributes="value n" selected="${recent.week == n and 'selected' or None}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="pushupsDay" id="pushupsDayLabel">Day</label>
+                                <select  class="input select-menu" id="pushupsDay" name="day">
+                                    <option class="value" tal:repeat="n [0,1,2,3]" tal:content="n" tal:attributes="value n" selected="${recent.day == n and 'selected' or None}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="pushupsLevel" id="pushupsLevelLabel">Level</label>
+                                <select  class="input select-menu" id="pushupsLevel" name="level">
+                                    <option class="value" tal:repeat="n [0,1,2,3,4,5,6,7,8,9,10]" tal:content="n" tal:attributes="value n" selected="${recent.level == n and 'selected' or None}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="pushupsSet1" id="pushupsSet1Label">Set 1</label>
+                                <input type="text" class="input select-menu" id="pushupsSet1" name="set1" size="5" maxlength="5" tal:attributes="value recent.set1" />
+                            </li>
+                            <li>
+                                <label for="pushupsSet2" id="pushupsSet2Label">Set 2</label>
+                                <input type="text" class="input select-menu" id="pushupsSet2" name="set2" size="5" maxlength="5" tal:attributes="value recent.set2" />
+                            </li>
+                            <li>
+                                <label for="pushupsSet3" id="pushupsSet3Label">Set 3</label>
+                                <input type="text" class="input select-menu" id="pushupsSet3" name="set3" size="5" maxlength="5" tal:attributes="value recent.set3" />
+                            </li>
+                            <li>
+                                <label for="pushupsSet4" id="pushupsSet4Label">Set 4</label>
+                                <input type="text" class="input select-menu" id="pushupsSet4" name="set4" size="5" maxlength="5" tal:attributes="value recent.set4" />
+                            </li>
+                            <li>
+                                <label for="pushupsExhaust" id="pushupsExhaustLabel">Exhaust</label>
+                                <input type="text" class="input select-menu" id="pushupsExhaust" name="exhaust" size="5" maxlength="5" tal:attributes="value recent.exhaust" />
+                            </li>
+                            <li>
+                                <label for="pushupsHashtags" id="pushupsHashtagsLabel">HashTags</label>
+                                <input type="text" class="input select-menu" id="pushupsHashtags" name="hashtags" size="100" maxlength="2000" tal:attributes="value recent.hashtags" />
+                            </li>
+                            <li>
+                                <label for="pushupsMentions" id="pushupsMentionsLabel">Mentions</label>
+                                <input type="text" class="input select-menu" id="pushupsMentions" name="mentions" size="100" maxlength="2000" tal:attributes="value recent.mentions" />
+                            </li>
+                            <li>
+                                <label for="pushupsMessage" id="pushupsMessageLabel">Message</label>
+                                <input type="text" class="input" id="pushupsMessage" name="message" size="100" maxlength="2000" tal:attributes="value recent.message" />
+                            </li>
+                            <li class="create-form">
+                                <input type="button" style="width: 8em;" class="control input submit_button" id="submit_entry_create" value=" Submit " />
+                                <input type="button" style="width: 8em;" class="control input cancel_button" id="cancel_entry_create" value=" Cancel " />
+                            </li>
+                            <li class="edit-form">
+                                <input type="button" style="width: 8em;" class="control input submit_button" id="submit_entry_edit" value=" Submit " />
+                                <input type="button" style="width: 8em;" class="control input cancel_button" id="cancel_entry_edit" value=" Cancel " />
+                            </li>
+                            <li class="view-form">
+                                <input type="button" style="width: 8em;" class="control input cancel_button" id="cancel_entry_view" value=" Cancel " />
+                            </li>
+                        </ul>
+                    </div>
+                    </fieldset>
+                </form>
+                <div class="bottom">
+                    <div id="status-panel">
+                        <div id="app-status">
+                            <span id="notifications">
+                                <img id="loading" src="/static/images/loading_bar.gif" alt="loading" />
+                                <span>Processing....Please Wait</span>
+                            </span>
+                            <span id="message" class="ui-widget"></span>
+                        </div>
+                        <div id="app-options">
+                            <ul>
+                                <li class="ignore" id="logout"><a href="/logout">Exit Tool</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+          <div class="footer">&copy; Copyright 2011, Shopzilla, Inc.</div>
+        </div>
+    </body>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/static/js/date-validation.js"></script>
+    <script type="text/javascript" src="/static/js/my-forms.js"></script>
+    <script type="text/javascript" src="/static/js/flexigrid/flexigrid.js"></script>
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                if ($('a.closeEl')) $('a.closeEl').bind('click', toggleContent);
+                var timecolwidth = 110;
+                var releaseGrid = $("#updates").flexigrid({
+                    url: '/REST/forms/listing?format=iphone',
+                    method: 'GET',
+                    dataType: 'json',
+                    colModel: [
+                        {display: 'ID', name: 'id', width: 30, sortable: false, align: 'left'},
+                        {display: 'Week', name: 'week', width: 30, sortable: false, align: 'left'},
+                        {display: 'Day', name: 'day', width: 20, sortable: false, align: 'left'},
+                        {display: 'Level', name: 'level', width: 30, sortable: false, align: 'left'},
+                        {display: 'Total', name: 'total', width: 50, sortable: false, align: 'left'},
+                        {display: '', name: '', width: 75, sortable: false, align: 'center'},
+                    ],
+                    buttons: [
+                        {name: 'New', bclass: 'add', onpress : showEntryForm},
+                        {separator: true},
+                        {name: 'Reload', bclass: 'reload', onpress: reloadPage},
+                        {separator: true},
+                    ],
+                    searchitems: [
+                        {display: 'Hashtags', name : 'hashtags', isdefault: false},
+                        {display: 'Mentions', name : 'mentions', isdefault: false},
+                        {display: 'ID', name : 'id', isdefault: true},
+                    ],
+                    sortname: 'createdDate',
+                    sortorder: 'desc',
+                    usepager: true,
+                    title: 'Items',
+                    useRp: true,
+                    rp: 5,
+                    rpOptions: [5,15,30,45,60],
+                    showTableToggleBtn: false,
+                    showToggleBtn: false,
+                    width: $(window).width()-10,
+                    height: $(window).height()-400,
+                    singleSelect: true,
+                    resizable: false,
+                });
+            });
+        var resizeTimer;
+        $(window).resize(function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                $(".flexigrid").width($(window).width()-10);
+                $("#release").width($(".flexigrid").width()-17);
+                $(".hDivBox table").width($(".hDiv").width()-15);
+                $(".bDiv").height($(window).height()-400);
+            }, 50);
+        });
+    </script>
+</html>

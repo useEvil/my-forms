@@ -1,6 +1,7 @@
-import logging
-import urllib
 import time
+import urllib
+import logging
+import twitter
 import calendar
 import datetime as date
 import webhelpers.paginate as paginate
@@ -20,12 +21,13 @@ def listing(request):
     """ json data for deals """
     params       = request.params
     currentPage  = int(params.get('page') or 1)
-    itemsPerPage = int(params.get('rp') or 30)
-    sortName     = params.get('sortname') or 'dealEndDate'
+    itemsPerPage = int(params.get('rp')   or 30)
+    sortName     = params.get('sortname')  or 'dealEndDate'
     sortOrder    = params.get('sortorder') or 'desc'
     query        = params.get('query')
-    type         = params.get('qtype') or ''
-    qrange       = params.get('range') or ''
+    type         = params.get('qtype')  or ''
+    qrange       = params.get('range')  or ''
+    form         = params.get('format') or None
     if query:
         relObjs = HundredPushups().getList()
         page    = paginate.Page(relObjs, page=currentPage, items_per_page=itemsPerPage)
@@ -44,13 +46,15 @@ def listing(request):
         row['cell'].append(item.week)
         row['cell'].append(item.day)
         row['cell'].append(item.level)
-        row['cell'].append(item.set1)
-        row['cell'].append(item.set2)
-        row['cell'].append(item.set3)
-        row['cell'].append(item.set4)
-        row['cell'].append(item.exhaust)
-        row['cell'].append(item.set1+item.set2+item.set3+item.set4+item.exhaust)
-        row['cell'].append(item.createdDate.strftime(getSettings('date.long')))
+        if not form:
+            row['cell'].append(item.set1)
+            row['cell'].append(item.set2)
+            row['cell'].append(item.set3)
+            row['cell'].append(item.set4)
+            row['cell'].append(item.exhaust)
+        row['cell'].append(item.total())
+        if not form:
+            row['cell'].append(item.createdDate.strftime(getSettings('date.long')))
         row['cell'].append('<img class="pushups edit_entry" alt="Edit Entry" title="Edit Entry" src="/static/images/edit.png" id="edit_%s" />&nbsp;<img class="pushups delete_entry" alt="Delete Entry" title="Delete Entry" src="/static/images/delete.png" id="delete_%s" />'%(item.id, item.id))
         result['rows'].append(row)
     return result
@@ -67,8 +71,7 @@ def reporting(request):
         label = request.params.get('range')
     for item in objects:
         created = calendar.timegm(item.createdDate.timetuple()) * 1000
-        total   = item.set1+item.set2+item.set3+item.set4+item.exhaust
-        list.append([created, total])
+        list.append([created, item.total()])
         labels.append({'title': 'Week %s, Day %s, Level %s'%(item.week, item.day, item.level), 'hashtags': item.hashtags, 'mentions': item.mentions, 'permalink': 'https://twitter.com/#!/useEvil/status/110958709164875776'})
     data ={
         'label':  label,
@@ -76,6 +79,7 @@ def reporting(request):
         'data':   list
     }
 #    Log.debug('==== data [%s]'%(data))
+    _init_twitter()
     return [data]
 
 def reports(request):
@@ -99,11 +103,14 @@ def reports(request):
     return data
 
 def create(request):
-    params = request.params
-    try:
-        HundredPushups().create(params)
-    except:
-        return { 'status': 404, 'message': 'Failed to Create Entry' }
+    params  = request.params
+    message = params.get('message')
+#    try:
+    entry = HundredPushups()
+    entry.create(params)
+    _post_twitter_update('%s %s (%s,%s,%s,%s,%s) (Week %s,Day %s,Level %s) %s %s'%(message, entry.total(), entry.set1, entry.set2, entry.set3, entry.set4, entry.exhaust, entry.week, entry.day, entry.level, entry.hashtags, entry.mentions))
+#    except:
+#        return { 'status': 404, 'message': 'Failed to Create Entry' }
     return { 'status': 200, 'message': 'Successfully Created Entry' }
 
 def view(request):
@@ -150,6 +157,7 @@ def _jsonify_data(data):
         'hashtag': data.hashtags,
         'mentions': data.mentions,
         'permalink': data.permalink,
+        'message': data.message,
         'createdDate': data.createdDate.strftime(getSettings('date.short')),
     }
     return hash
@@ -168,3 +176,20 @@ def _message_sql_query(params=None):
         start, end = getStartEnd(None, end, 'long')
     results  = HundredPushups().getByCreatedDate(start, end, query, type)
     return results
+
+def _post_twitter_update(status=None):
+    if not status: return
+    api = _init_twitter()
+    status = api.PostUpdate(status)
+
+def _init_twitter():
+    try:
+        api = twitter.Api(
+                consumer_key=getSettings('twitter.consumer_key'),
+                consumer_secret=getSettings('twitter.consumer_secret'),
+                access_token_key=getSettings('twitter.access_token_key'),
+                access_token_secret=getSettings('twitter.access_token_secret')
+            )
+    except:
+        return
+    return api

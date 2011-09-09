@@ -3,6 +3,7 @@ var isOpen  = false;
 var timeOut = 12000;
 var tID     = '';
 var formID  = '';
+var isPhone = '';
 var shown   = [ ];
 var dLong   = 'yyyy-M-d HH:mm:ss';
 var dShort  = 'yyyy-M-d';
@@ -21,6 +22,9 @@ $('body').keyup(cancelOverlay);
 $(window).bind('resize',showOverlayBox);
 
 $(document).ready(function() {
+    if (window.location.href.indexOf('iphone') > -1) {
+        isPhone = 1;
+    }
     clearMessage();
     initDatePickers();
 });
@@ -157,7 +161,7 @@ function cancelOverlay(e) {
         }
         formID  = '';
     }
-    clearForm(formID);
+    cancelForm(formID, formID);
 }
 
 function cancelForm(event, id) {
@@ -166,12 +170,17 @@ function cancelForm(event, id) {
     var display = parts[1];
     $('#'+display+'_form').find('input').each(function(){
         if ($(this).attr('type') == 'text') {
-            $(this).attr('value', '');
+            if ($(this).id != 'pushupsHashtags' || $(this).id != 'pushupsMentions') {
+                $(this).attr('value', '');
+            }
         }
     });
-
-
-    doOverlayClose(display);
+    if (isPhone) {
+        $('#entry_form').hide();
+        $('#middle').show();
+    } else {
+        doOverlayClose(display);
+    }
 }
 
 function submitEntryForm(event, id) {
@@ -203,8 +212,14 @@ function showEntryForm(event) {
     $('#title').html('Create');
     $('.edit-form').hide();
     $('.view-form').hide();
+    $('.create-form').show();
     formID      = 'entry'
-    doOverlayOpen(formID);
+    if (isPhone) {
+        $('#entry_form').show();
+        $('#middle').hide();
+    } else {
+        doOverlayOpen(formID);
+    }
 }
 
 function showViewEntry(event) {
@@ -226,7 +241,12 @@ function showViewEntry(event) {
         $('.create-form').hide();
         $('.view-form').show();
     }
-    doOverlayOpen('entry');
+    if (isPhone) {
+        $('#entry_form').show();
+        $('#middle').hide();
+    } else {
+        doOverlayOpen('entry');
+    }
 }
 
 function showIndexPage(event) {
@@ -257,7 +277,11 @@ function updateEntryForm(data) {
     doOverlayClose('entry');
     updateStatus(data);
     if (data['status'] != 200) return;
-    window.location.replace('/');
+    if (isPhone) {
+        window.location.replace('/iphone');
+    } else {
+        window.location.replace('/');
+    }
 }
 
 function updateStatus(data) {
