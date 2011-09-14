@@ -105,12 +105,13 @@ def reports(request):
 def create(request):
     params  = request.params
     message = params.get('message')
-#    try:
-    entry = HundredPushups()
-    entry.create(params)
-    _post_twitter_update('%s %s (%s,%s,%s,%s,%s) (Week %s,Day %s,Level %s) %s %s'%(message, entry.total(), entry.set1, entry.set2, entry.set3, entry.set4, entry.exhaust, entry.week, entry.day, entry.level, entry.hashtags, entry.mentions))
-#    except:
-#        return { 'status': 404, 'message': 'Failed to Create Entry' }
+    try:
+        entry = HundredPushups()
+        entry.create(params)
+        if params.get('twitter'):
+            _post_twitter_update('%s%s (%s,%s,%s,%s,%s) (Week %s,Day %s,Level %s) %s %s'%(message, entry.total(), entry.set1, entry.set2, entry.set3, entry.set4, entry.exhaust, entry.week, entry.day, entry.level, entry.hashtags, entry.mentions))
+    except:
+        return { 'status': 404, 'message': 'Failed to Create Entry' }
     return { 'status': 200, 'message': 'Successfully Created Entry' }
 
 def view(request):
@@ -179,6 +180,7 @@ def _message_sql_query(params=None):
 
 def _post_twitter_update(status=None):
     if not status: return
+    print 'Sending to Twitter...'
     api = _init_twitter()
     status = api.PostUpdate(status)
 

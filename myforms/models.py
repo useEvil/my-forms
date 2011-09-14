@@ -32,7 +32,7 @@ class TwitterStatus(Base):
     """
     __tablename__ = 'TWITTER_STATUS'
 
-    id       = Column('ID', Integer, primary_key = True)
+    id       = Column('ID', Integer, primary_key=True)
     status   = Column('STATUS', Unicode(255), nullable=False)
     hashtags = Column('HASHTAGS', Unicode(2000), nullable=True)
     mentions = Column('MENTIONS', Unicode(2000), nullable=True)
@@ -71,7 +71,7 @@ class HundredPushups(Base):
     """
     __tablename__ = 'HUNDRED_PUSHUPS'
 
-    id          = Column('ID', Integer, primary_key = True)
+    id          = Column('ID', Integer, primary_key=True)
     week        = Column('WEEK', Integer, nullable=False)
     day         = Column('DAY', Integer, nullable=False)
     level       = Column('LEVEL', Integer, nullable=False)

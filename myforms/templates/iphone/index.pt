@@ -97,6 +97,10 @@
                                 <label for="pushupsMessage" id="pushupsMessageLabel">Message</label>
                                 <input type="text" class="input" id="pushupsMessage" name="message" size="100" maxlength="2000" tal:attributes="value recent.message" />
                             </li>
+                            <li>
+                                <label for="pushupsTwitter" id="pushupsTwitterLabel">Send to Twitter</label>
+                                <input type="checkbox" class="input" id="pushupsTwitter" name="twitter" />
+                            </li>
                             <li class="create-form">
                                 <input type="button" style="width: 8em;" class="control input submit_button" id="submit_entry_create" value=" Submit " />
                                 <input type="button" style="width: 8em;" class="control input cancel_button" id="cancel_entry_create" value=" Cancel " />
