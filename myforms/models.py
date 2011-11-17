@@ -234,6 +234,26 @@ class Fundraiser(Base):
         results = DBSession().query(self.__class__).all()
         return results
 
+    def getGraphingData(self):
+        q = DBSession().query(
+                func.sum(Fundraiser.candy1).label('total_candy1'),
+                func.sum(Fundraiser.candy2).label('total_candy2'),
+                func.sum(Fundraiser.candy3).label('total_candy3'),
+                func.sum(Fundraiser.candy4).label('total_candy4'),
+                func.sum(Fundraiser.candy5).label('total_candy5'),
+                func.sum(Fundraiser.candy6).label('total_candy6'),
+                func.sum(Fundraiser.candy7).label('total_candy7'),
+                func.sum(Fundraiser.candy8).label('total_candy8'),
+                func.sum(Fundraiser.candy9).label('total_candy9'),
+                func.sum(Fundraiser.candy10).label('total_candy10'),
+                func.sum(Fundraiser.candy11).label('total_candy11'),
+                func.sum(Fundraiser.candy12).label('total_candy12'),
+                func.sum(Fundraiser.candy13).label('total_candy13'),
+                Fundraiser.createdDate,
+        )
+        q = q.group_by(Fundraiser.createdDate)
+        return q.all()
+
     def total_price(self):
         total =  (self.candy1  * 18.9)
         total += (self.candy2  * 16.5)
