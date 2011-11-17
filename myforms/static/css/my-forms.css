@@ -95,3 +95,4 @@ fieldset { border: 1px solid #ddd;padding: 0 0.5em 0.5em; }
 .control-link:hover { cursor: pointer; }
 
 .graph { border: 3px solid #373839;width: 97%;height: 300px;background-color: #FFFFFF;margin: 10px 0 10px 10px; }
+.verticaltext { float: none !important;width: 5px;color: #333;display: block;position: absolute;white-space: nowrap;font-family: "Trebuchet MS", Helvetica, sans-serif;font-size: 14px;font-weight: normal;text-shadow: 0px 0px 1px #333;top: 345px;-webkit-transform: rotate(-90deg);-webkit-transform-origin: 50% 0%;-moz-transform: rotate(-90deg);-moz-transform-origin: 10% 10%;-o-transform: rotate(-90deg);-o-transform-origin:  10% 10%; }

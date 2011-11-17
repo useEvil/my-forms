@@ -27,8 +27,11 @@ if sys.version_info[:3] < (2,5,0):
     requires.append('pysqlite')
 
 setup(name='my-forms',
-      version='0.0',
+      version='0.1',
       description='my-forms',
+      author='Thai Nguyen',
+      author_email='thai@shopzilla.com',
+      url='http://www.shopzilla.com',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
         "Programming Language :: Python",
@@ -36,9 +39,6 @@ setup(name='my-forms',
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
         ],
-      author='',
-      author_email='',
-      url='',
       keywords='web wsgi bfg pylons pyramid',
       packages=find_packages(),
       include_package_data=True,

@@ -16,6 +16,7 @@ def main(global_config, **settings):
     config.add_route('index', '/', view='myforms.views.index', view_renderer='templates/index.pt')
     config.add_route('reports', '/reports', view='myforms.views.reports', view_renderer='templates/reports.pt')
     config.add_route('iphone', '/iphone', view='myforms.views.iphone', view_renderer='templates/iphone/index.pt')
+    config.add_route('fundraiser', '/fundraiser', view='myforms.views.fundraiser', view_renderer='templates/fundraiser.pt')
     # JSON REST
     config.add_route('rest_listing', '/REST/forms/listing', view='myforms.rest.listing', renderer='json', request_method='GET')
     config.add_route('rest_reporting', '/REST/forms/reporting', view='myforms.rest.reporting', renderer='json', request_method='GET')
@@ -25,4 +26,6 @@ def main(global_config, **settings):
     config.add_route('rest_delete', '/REST/forms/delete/{id}', view='myforms.rest.delete', renderer='json', request_method='GET')
     config.add_route('rest_error', '/REST/forms/error/{id}', view='myforms.rest.error', renderer='json', request_method='GET')
     config.add_route('rest_reports', '/REST/forms/reports/{x}/{y}', view='myforms.rest.reports', renderer='json', request_method='GET')
+    config.add_route('rest_orders', '/REST/forms/orders', view='myforms.rest.orders', renderer='json', request_method='GET')
+    config.add_route('rest_orders_new', '/REST/forms/new', view='myforms.rest.new', renderer='json', request_method='POST')
     return config.make_wsgi_app()

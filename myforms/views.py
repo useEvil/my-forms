@@ -2,7 +2,7 @@ import datetime as date
 import myforms.helpers as h
 
 from myforms.models import DBSession
-from myforms.models import TwitterStatus, HundredPushups
+from myforms.models import TwitterStatus, HundredPushups, Fundraiser
 from myforms.models import MyModel
 
 from pyramid.httpexceptions import HTTPFound
@@ -10,7 +10,7 @@ from pyramid.renderers import render_to_response
 
 def my_view(request):
     root = DBSession().query(MyModel).filter(MyModel.name==u'root').first()
-    return { 'root': root, 'h': h }
+    return { 'root': root, 'h': h, 'project':'my-forms' }
 
 def index(request):
     range  = ''
@@ -43,6 +43,25 @@ def index(request):
 def iphone(request):
     recent = HundredPushups().getRecent()
     return { 'h': h, 'recent': recent }
+
+def fundraiser(request):
+    orders = Fundraiser().getAll()
+    totals = {
+        'candy1': Fundraiser().getTotals(orders, 'candy1'),
+        'candy2': Fundraiser().getTotals(orders, 'candy2'),
+        'candy3': Fundraiser().getTotals(orders, 'candy3'),
+        'candy4': Fundraiser().getTotals(orders, 'candy4'),
+        'candy5': Fundraiser().getTotals(orders, 'candy5'),
+        'candy6': Fundraiser().getTotals(orders, 'candy6'),
+        'candy7': Fundraiser().getTotals(orders, 'candy7'),
+        'candy8': Fundraiser().getTotals(orders, 'candy8'),
+        'candy9': Fundraiser().getTotals(orders, 'candy9'),
+        'candy10': Fundraiser().getTotals(orders, 'candy10'),
+        'candy11': Fundraiser().getTotals(orders, 'candy11'),
+        'candy12': Fundraiser().getTotals(orders, 'candy12'),
+        'candy13': Fundraiser().getTotals(orders, 'candy13')
+    }
+    return { 'h': h, 'orders': orders, 'totals': totals }
 
 def reports(request):
     return { 'h': h }

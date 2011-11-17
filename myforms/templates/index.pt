@@ -86,6 +86,18 @@
                                             <input type="text" class="input select-menu" id="pushupsSet4" name="set4" size="5" maxlength="5" tal:attributes="value recent.set4" />
                                         </li>
                                         <li>
+                                            <label for="pushupsSet5" id="pushupsSet5Label">Set 5</label>
+                                            <input type="text" class="input select-menu" id="pushupsSet5" name="set5" size="5" maxlength="5" tal:attributes="value recent.set5" />
+                                        </li>
+                                        <li>
+                                            <label for="pushupsSet6" id="pushupsSet6Label">Set 6</label>
+                                            <input type="text" class="input select-menu" id="pushupsSet6" name="set6" size="5" maxlength="5" tal:attributes="value recent.set6" />
+                                        </li>
+                                        <li>
+                                            <label for="pushupsSet7" id="pushupsSet7Label">Set 7</label>
+                                            <input type="text" class="input select-menu" id="pushupsSet7" name="set7" size="5" maxlength="5" tal:attributes="value recent.set7" />
+                                        </li>
+                                        <li>
                                             <label for="pushupsExhaust" id="pushupsExhaustLabel">Exhaust</label>
                                             <input type="text" class="input select-menu" id="pushupsExhaust" name="exhaust" size="5" maxlength="5" tal:attributes="value recent.exhaust" />
                                         </li>
@@ -140,7 +152,7 @@
             </div>
         </div>
         <div id="footer">
-          <div class="footer">&copy; Copyright 2011, Shopzilla, Inc.</div>
+          <div class="footer">&copy; Copyright 2011, Thai Nguyen.</div>
         </div>
     </body>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
@@ -162,16 +174,19 @@
                     dataType: 'json',
                     colModel: [
                         {display: 'ID', name: 'id', width: 70, sortable: false, align: 'left'},
-                        {display: 'Week', name: 'week', width: 50, sortable: false, align: 'left'},
-                        {display: 'Day', name: 'day', width: 50, sortable: false, align: 'left'},
-                        {display: 'Level', name: 'level', width: 50, sortable: false, align: 'left'},
-                        {display: 'Set 1', name: 'set1', width: 50, sortable: false, align: 'left'},
-                        {display: 'Set 2', name: 'set2', width: 50, sortable: false, align: 'left'},
-                        {display: 'Set 3', name: 'set3', width: 50, sortable: false, align: 'left'},
-                        {display: 'Set 4', name: 'set4', width: 50, sortable: false, align: 'left'},
-                        {display: 'Exhaust', name: 'exhaust', width: 50, sortable: false, align: 'left'},
-                        {display: 'Total', name: 'total', width: 50, sortable: false, align: 'left'},
-                        {display: 'Created On', name: 'created', width: 150, sortable: false, align: 'center'},
+                        {display: 'Week', name: 'week', width: 45, sortable: false, align: 'left'},
+                        {display: 'Day', name: 'day', width: 45, sortable: false, align: 'left'},
+                        {display: 'Level', name: 'level', width: 45, sortable: false, align: 'left'},
+                        {display: 'Set 1', name: 'set1', width: 45, sortable: false, align: 'left'},
+                        {display: 'Set 2', name: 'set2', width: 45, sortable: false, align: 'left'},
+                        {display: 'Set 3', name: 'set3', width: 45, sortable: false, align: 'left'},
+                        {display: 'Set 4', name: 'set4', width: 45, sortable: false, align: 'left'},
+                        {display: 'Set 5', name: 'set5', width: 45, sortable: false, align: 'left'},
+                        {display: 'Set 6', name: 'set6', width: 45, sortable: false, align: 'left'},
+                        {display: 'Set 7', name: 'set7', width: 45, sortable: false, align: 'left'},
+                        {display: 'Exhaust', name: 'exhaust', width: 45, sortable: false, align: 'left'},
+                        {display: 'Total', name: 'total', width: 45, sortable: false, align: 'left'},
+                        {display: 'Created On', name: 'created', width: 140, sortable: false, align: 'center'},
                         {display: '', name: '', width: 50, sortable: false, align: 'center'},
                     ],
                     buttons: [
@@ -274,7 +289,7 @@
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(function() {
                 $(".flexigrid").width($(window).width()-40);
-                $("#release").width($(".flexigrid").width()-17);
+                $("#updates").width($(".flexigrid").width()-17);
                 $(".hDivBox table").width($(".hDiv").width()-15);
                 $(".bDiv").height($(window).height()-550);
             }, 50);

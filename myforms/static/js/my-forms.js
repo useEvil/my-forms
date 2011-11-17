@@ -15,6 +15,9 @@ $('.cancel_login').live('click', cancelForm);
 $('.edit_entry').live('click', showViewEntry);
 $('.view_entry').live('click', showViewEntry);
 $('.delete_entry').live('click', deleteEntry);
+$('.show-candy').live('click', showImage);
+$('#close-candy').live('click', closeImage);
+$('#new-order').live('click', submitOrder);
 
 
 /* Binds */
@@ -208,6 +211,20 @@ function submitEntryForm(event, id) {
     );
 }
 
+function submitOrder(event, id) {
+    var params = $('#order-form').serialize();
+    $.ajax(
+        {
+            url: '/REST/forms/new',
+            type: 'post',
+            data: params,
+            timeout: 10000,
+            error: failedEntryForm,
+            success: updateOrderList,
+        }
+    );
+}
+
 function showEntryForm(event) {
     $('#title').html('Create');
     $('.edit-form').hide();
@@ -257,6 +274,18 @@ function showReports(event) {
     window.location.href = '/reports';
 }
 
+function showImage(event) {
+    var src = '/static/images/fundraiser/'+this.id+'.jpg';
+    formID  = 'image';
+    $('#image_layer_src').attr('src', src);
+    doOverlayOpen(formID, 25);
+}
+
+function closeImage(event) {
+    formID = 'image';
+    doOverlayClose(formID, 25);
+}
+
 function reloadPage() {
     window.location.reload();
 }
@@ -284,6 +313,12 @@ function updateEntryForm(data) {
     }
 }
 
+function updateOrderList(data) {
+    updateStatus(data);
+    if (data['status'] != 200) return;
+    window.location.replace('/fundraiser');
+}
+
 function updateStatus(data) {
 //          //alert("updateStatus ");
     if (tID) clearTimeout(tID);
@@ -304,6 +339,9 @@ function populateForm(data) {
     $('#pushupsSet2').val(data['entry']['set2']);
     $('#pushupsSet3').val(data['entry']['set3']);
     $('#pushupsSet4').val(data['entry']['set4']);
+    $('#pushupsSet5').val(data['entry']['set5']);
+    $('#pushupsSet6').val(data['entry']['set6']);
+    $('#pushupsSet7').val(data['entry']['set7']);
     $('#pushupsExhaust').val(data['entry']['exhaust']);
     $('#pushupsHashtags').val(data['entry']['hashtag']);
     $('#pushupsMentions').val(data['entry']['mentions']);

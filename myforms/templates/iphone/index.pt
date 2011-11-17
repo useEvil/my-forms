@@ -82,6 +82,18 @@
                                 <input type="text" class="input select-menu" id="pushupsSet4" name="set4" size="5" maxlength="5" tal:attributes="value recent.set4" />
                             </li>
                             <li>
+                                <label for="pushupsSet5" id="pushupsSet5Label">Set 5</label>
+                                <input type="text" class="input select-menu" id="pushupsSet5" name="set5" size="5" maxlength="5" tal:attributes="value recent.set5" />
+                            </li>
+                            <li>
+                                <label for="pushupsSet6" id="pushupsSet6Label">Set 6</label>
+                                <input type="text" class="input select-menu" id="pushupsSet6" name="set6" size="5" maxlength="5" tal:attributes="value recent.set6" />
+                            </li>
+                            <li>
+                                <label for="pushupsSet7" id="pushupsSet7Label">Set 7</label>
+                                <input type="text" class="input select-menu" id="pushupsSet7" name="set7" size="5" maxlength="5" tal:attributes="value recent.set7" />
+                            </li>
+                            <li>
                                 <label for="pushupsExhaust" id="pushupsExhaustLabel">Exhaust</label>
                                 <input type="text" class="input select-menu" id="pushupsExhaust" name="exhaust" size="5" maxlength="5" tal:attributes="value recent.exhaust" />
                             </li>
@@ -135,7 +147,7 @@
             </div>
         </div>
         <div id="footer">
-          <div class="footer">&copy; Copyright 2011, Shopzilla, Inc.</div>
+          <div class="footer">&copy; Copyright 2011, Thai Nguyen.</div>
         </div>
     </body>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
@@ -191,7 +203,7 @@
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(function() {
                 $(".flexigrid").width($(window).width()-10);
-                $("#release").width($(".flexigrid").width()-17);
+                $("#updates").width($(".flexigrid").width()-17);
                 $(".hDivBox table").width($(".hDiv").width()-15);
                 $(".bDiv").height($(window).height()-400);
             }, 50);

@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+    <head>
+        <title>My Forms Tool</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <meta name="keywords" content="python web application tool" />
+        <meta name="description" content="pyramid web application" />
+        <link rel="shortcut icon" href="${request.static_url('myforms:static/images/favicon.ico')}" />
+        <link rel="stylesheet" href="${request.static_url('myforms:static/css/my-forms.css')}" type="text/css" media="screen" charset="utf-8" />
+        <link rel="stylesheet" href="${request.static_url('myforms:static/css/ui-lightness/jquery-ui.css')}" type="text/css" media="screen" charset="utf-8" />
+        <!--[if lte IE 6]>
+        <link rel="stylesheet" href="${request.static_url('myforms:static/ie6.css')}" type="text/css" media="screen" charset="utf-8" />
+        <![endif]-->
+    </head>
+    <body>
+        <!-- The dark background -->
+        <div class="background-cover">&nbsp;</div>
+        <div class="background-cover-top">&nbsp;</div>
+        <div id="overlay-box-loading" class="overlay-loading">
+            <p>Processing&nbsp;...&nbsp;Please Wait</p>
+        </div>
+        <div id="wrap">
+            <div id="top">
+                <div class="top align-center">
+                    <h1>My Forms Tool</h1>
+                </div>
+            </div>
+            <div id="middle">
+                <div id="overlay-box-image" class="overlay-image">
+                    <div class="overlay-content" id="close-candy">
+                        <img src="/static/images/trans.gif" id="image_layer_src" alt="View Image" title="View Image" />
+                    </div>
+                </div>
+                <form id="order-form" style="width: 95%" onSubmit="return false;">
+                    <table id="orders" cellpadding="5" style="border-collapse: collapse;table-layout: auto;width: auto;border-spacing: 5px;border: 3px solid #fff;">
+                        <tr>
+                            <td style="font-size: 8pt;">(click name to view image)</td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy1">$18.90 - 1lb. Truffles (#902)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy2">$16.50 - 1lb. Assorted Chocolates (#318)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy3">$16.50 - 1lb. Milk Chocolates (#326)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy3">$16.50 - 1lb. Dark Chocolates (#330)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy4">$16.50 - 1lb. Nuts & Chews (#334)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy5">$16.50 - 1lb. Toffee-ettes (#316)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy6">$15.90 - 1lb. 8oz. Peanut Brittle (#355)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy7">$8.25 - 8oz. Assorted Molasses Chips (#360)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy8">$8.25 - 8oz. Peppermints (#358)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy9">$15.80 - 1lb. 5oz. Gourmet Lollypops (#296)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy10">$6.50 - 4oz. Jolly Snowman Box (#9127)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy11">$6.50 - 4oz. Mini Holiday Fancy Box (#596)</span></td>
+                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy12">$16.50 - 1lb. Gift Certificate (#767) US Only</span></td>
+                        </tr>
+                        <tr style="border-bottom: 3px solid #373839;">
+                            <td>Name</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr tal:repeat="order orders" style="background-color: #e6e6e6;border: 5px solid #fff;">
+                            <td tal:content="order.name">Name</td>
+                            <td tal:content="order.candy1">#</td>
+                            <td tal:content="order.candy2">#</td>
+                            <td tal:content="order.candy3">#</td>
+                            <td tal:content="order.candy4">#</td>
+                            <td tal:content="order.candy5">#</td>
+                            <td tal:content="order.candy6">#</td>
+                            <td tal:content="order.candy7">#</td>
+                            <td tal:content="order.candy8">#</td>
+                            <td tal:content="order.candy9">#</td>
+                            <td tal:content="order.candy10">#</td>
+                            <td tal:content="order.candy11">#</td>
+                            <td tal:content="order.candy12">#</td>
+                            <td tal:content="order.candy13">#</td>
+                            <td tal:content="order.total_price()">$$</td>
+                        </tr>
+                        <tr style="background-color: #858585;border: 5px solid #fff;">
+                            <td>&nbsp;</td>
+                            <td tal:content="totals['candy1']">#</td>
+                            <td tal:content="totals['candy2']">#</td>
+                            <td tal:content="totals['candy3']">#</td>
+                            <td tal:content="totals['candy4']">#</td>
+                            <td tal:content="totals['candy5']">#</td>
+                            <td tal:content="totals['candy6']">#</td>
+                            <td tal:content="totals['candy7']">#</td>
+                            <td tal:content="totals['candy8']">#</td>
+                            <td tal:content="totals['candy9']">#</td>
+                            <td tal:content="totals['candy10']">#</td>
+                            <td tal:content="totals['candy11']">#</td>
+                            <td tal:content="totals['candy12']">#</td>
+                            <td tal:content="totals['candy13']">#</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr class="new-order">
+                            <td><input type="text" name="name" value="" size="40" maxlength="200" /></td>
+                            <td><input type="text" name="candy1" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy2" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy3" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy4" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy5" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy6" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy7" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy8" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy9" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy10" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy11" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy12" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy13" value="" size="2" maxlength="2" /></td>
+                            <td><input type="image" name="new" id="new-order" src="/static/images/add.png" /></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div id="bottom">
+                <div class="bottom">
+                    <div id="placeholder" class="graph align-center" tal:condition="orders">
+                        <p style="padding-top: 100px;">Processing&nbsp;...&nbsp;Please Wait</p>
+                        <img src="/static/images/loading_bar.gif" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+          <div class="footer">&copy; Copyright 2011, Thai Nguyen.</div>
+        </div>
+    </body>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/static/js/my-forms.js"></script>
+    <script type="text/javascript" src="/static/js/flot/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="/static/js/flot/jquery.flot.selection.js"></script>
+    <script type="text/javascript" src="/static/js/flot/jquery.flot.axislabels.js"></script>
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                var options = {
+                    series: {
+                        lines: { show: true },
+                        points: { show: true }
+                    },
+                    yaxis:  { axisLabel: 'Total', axisLabelUseCanvas: true },
+                    xaxis:  { mode: 'time', timeformat: '%0m/%0d', axisLabel: 'Date', axisLabelUseCanvas: true },
+                    points: { show: true },
+                    legend: { noColumns: 2 },
+                    selection: { mode: 'x' },
+                    grid:   {
+                        backgroundColor: '#ffffff',
+                        borderWidth: 3,
+                        borderColor: 'black',
+                        minBorderMargin: 20,
+                        hoverable: true,
+                        clickable: true,
+                    },
+                };
+                var data = [ ];
+                var placeholder   = $('#placeholder');
+                var previousPoint = null;
+                function onDataReceived(series) {
+                    $.plot(placeholder, series, options);
+                }
+                placeholder.bind('plotselected', function (event, ranges) {
+                    $.plot(
+                        placeholder, data,
+                        $.extend(true, {}, options, {
+                            xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to }
+                        })
+                    );
+                });
+                $.ajax({
+                    url: '/REST/forms/orders',
+                    method: 'GET',
+                    dataType: 'json',
+                    timeout: 900000,
+                    success: onDataReceived
+                });
+            });
+        var resizeTimer;
+        $(window).resize(function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                $(".flexigrid").width($(window).width()-40);
+                $("#updates").width($(".flexigrid").width()-17);
+                $(".hDivBox table").width($(".hDiv").width()-15);
+                $(".bDiv").height($(window).height()-550);
+            }, 50);
+        });
+    </script>
+</html>
