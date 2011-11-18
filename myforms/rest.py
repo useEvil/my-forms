@@ -232,6 +232,15 @@ def delete(request):
         return { 'status': 404, 'message': 'Failed to Delete Entry' }
     return { 'status': 200, 'message': 'Successfully Delete Entry' }
 
+def paid(request):
+    id = request.matchdict['id']
+    try:
+        order = Fundraiser().getById(id)
+        order.paid = 1
+    except:
+        return { 'status': 404, 'message': 'Failed to Update Order' }
+    return { 'status': 200, 'message': 'Successfully Update Order' }
+
 def error(request):
     return { 'status': request.matchdict['id'], 'message': 'You Do Not have permissions to Approve Release Ticket' }
 

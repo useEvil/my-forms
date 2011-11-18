@@ -28,4 +28,5 @@ def main(global_config, **settings):
     config.add_route('rest_reports', '/REST/forms/reports/{x}/{y}', view='myforms.rest.reports', renderer='json', request_method='GET')
     config.add_route('rest_orders', '/REST/forms/orders', view='myforms.rest.orders', renderer='json', request_method='GET')
     config.add_route('rest_orders_new', '/REST/forms/new', view='myforms.rest.new', renderer='json', request_method='POST')
+    config.add_route('rest_orders_paid', '/REST/forms/paid/{id}', view='myforms.rest.paid', renderer='json', request_method='GET')
     return config.make_wsgi_app()

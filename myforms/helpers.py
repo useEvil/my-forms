@@ -50,8 +50,8 @@ def escapeValues(dict={}, elements=[]):
         dict[elem] = escape_value(dict[elem])
     return dict
 
-def price(n):
-    if n is None: return "$0.00"
+def price(n, sym):
+    if n is None: return sym and "$0.00" or "0.00"
     n = str("%.2f" % float(n))
     negative = False
     n = str(n)
@@ -67,7 +67,10 @@ def price(n):
         if i and (not (i % 3)):
             r.insert(0, ',')
         r.insert(0, c)
-    out = "$" + ''.join(r)
+    if not sym:
+        out = ''.join(r)
+    else:
+        out = "$" + ''.join(r)
     if cents:
         out += '.' + cents[0:2]
     if negative:

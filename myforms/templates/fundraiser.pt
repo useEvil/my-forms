@@ -34,7 +34,20 @@
                 <form id="order-form" style="width: 95%" onSubmit="return false;">
                     <table id="orders" cellpadding="5" style="border-collapse: collapse;table-layout: auto;width: auto;border-spacing: 5px;border: 3px solid #fff;">
                         <tr>
-                            <td style="font-size: 8pt;">(click name to view image)</td>
+                            <td style="font-size: 8pt;">
+                                <blockquote>
+                                <strong>Nov. 14, 2011</strong> - Starts<br />
+                                <strong>Nov. 30, 2011</strong> - Ends<br /><br />
+                                Fill in order form with your name and desired amounts.<br /><br />
+                                Or use the attached PDF order <a href="http://fundraiser.thaiandhien.com/2011-Winter-Fundraiser.pdf" target="_order">form</a>.<br /><br />
+                                Thank you in advanced for all your help,<br /><br />
+
+                                The Nguyen Family<br /><br />
+
+                                (click name to view image)<br />
+                                (click total to pay via paypal)<br />
+                                </blockquote>
+                            </td>
                             <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy1">$18.90 - 1lb. Truffles (#902)</span></td>
                             <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy2">$16.50 - 1lb. Assorted Chocolates (#318)</span></td>
                             <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy3">$16.50 - 1lb. Milk Chocolates (#326)</span></td>
@@ -50,7 +63,7 @@
                             <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy12">$16.50 - 1lb. Gift Certificate (#767) US Only</span></td>
                         </tr>
                         <tr style="border-bottom: 3px solid #373839;">
-                            <td>Name</td>
+                            <td>Name &amp; Email</td>
                             <td>#</td>
                             <td>#</td>
                             <td>#</td>
@@ -67,7 +80,7 @@
                             <td>&nbsp;</td>
                         </tr>
                         <tr class="new-order">
-                            <td><input type="text" name="name" value="" size="40" maxlength="200" /></td>
+                            <td nowrap><input type="text" name="name" value="" size="20" maxlength="200" /><input type="text" name="email" value="" size="20" maxlength="200" /></td>
                             <td><input type="text" name="candy1" value="" size="2" maxlength="2" /></td>
                             <td><input type="text" name="candy2" value="" size="2" maxlength="2" /></td>
                             <td><input type="text" name="candy3" value="" size="2" maxlength="2" /></td>
@@ -84,7 +97,7 @@
                             <td><input type="image" name="new" id="new-order" src="/static/images/add.png" /></td>
                         </tr>
                         <tr tal:repeat="order orders" style="background-color: #e6e6e6;border: 5px solid #fff;">
-                            <td tal:content="order.name">Name</td>
+                            <td tal:content="order.name" tal:attributes="title order.email" style="color: ${order.paid and '#fefefe' or '#00000'}">Name</td>
                             <td tal:content="order.candy1">#</td>
                             <td tal:content="order.candy2">#</td>
                             <td tal:content="order.candy3">#</td>
@@ -98,7 +111,8 @@
                             <td tal:content="order.candy11">#</td>
                             <td tal:content="order.candy12">#</td>
                             <td tal:content="order.candy13">#</td>
-                            <td tal:content="order.total_price()">$$</td>
+                            <td tal:condition="not order.paid">$<a href="#" class="pay-now" tal:content="order.total_price()" tal:attributes="id order.id">$$</a></td>
+                            <td tal:condition="order.paid">$<span tal:content="order.total_price()">$$</span></td>
                         </tr>
                         <tr style="background-color: #C0C0C0;border: 5px solid #fff;">
                             <td>&nbsp;</td>
@@ -118,6 +132,16 @@
                             <td>&nbsp;</td>
                         </tr>
                     </table>
+                </form>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="pay-now" class="hidden">
+                    <input type="hidden" name="cmd" value="_xclick">
+                    <input type="hidden" name="business" value="thai@thaiandhien.com">
+                    <input type="hidden" name="lc" value="US">
+                    <input type="hidden" name="item_name" value="See's Candy Fundraiser">
+                    <input type="hidden" name="currency_code" value="USD">
+                    <input type="hidden" name="button_subtype" value="services">
+                    <input type="hidden" name="bn" value="PP-BuyNowBF:btn_paynow_SM.gif:NonHosted">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
                 </form>
             </div>
             <div id="bottom">

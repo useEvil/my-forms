@@ -15,6 +15,7 @@ $('.cancel_login').live('click', cancelForm);
 $('.edit_entry').live('click', showViewEntry);
 $('.view_entry').live('click', showViewEntry);
 $('.delete_entry').live('click', deleteEntry);
+$('.pay-now').live('click', submitPayPal);
 $('.show-candy').live('click', showImage);
 $('#close-candy').live('click', closeImage);
 $('#new-order').live('click', submitOrder);
@@ -221,6 +222,20 @@ function submitOrder(event, id) {
             timeout: 10000,
             error: failedEntryForm,
             success: updateOrderList,
+        }
+    );
+}
+
+function submitPayPal(event, id) {
+    var params = $('#pay-now').serialize() + '&amount=' + this.innerHTML + '&order_id=' + this.id;
+    $.ajax(
+        {
+            url: 'https://www.paypal.com/cgi-bin/webscr',
+            type: 'post',
+            data: params,
+            timeout: 10000,
+            error: failedEntryForm,
+            success: updateStatus,
         }
     );
 }

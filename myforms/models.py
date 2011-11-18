@@ -181,6 +181,8 @@ class Fundraiser(Base):
     (
         ID              NUMBER(2) NOT NULL,
         NAME            VARCHAR2(2000) NULL,
+        EMAIL           VARCHAR2(2000) NULL,
+        PAID            NUMBER(1) NULL DEFAULT 0,
         CANDY1          NUMBER(2) NULL DEFAULT 0,
         CANDY2          NUMBER(2) NULL DEFAULT 0,
         CANDY3          NUMBER(2) NULL DEFAULT 0,
@@ -202,6 +204,8 @@ class Fundraiser(Base):
 
     id          = Column('ID', Integer, primary_key=True)
     name        = Column('NAME', Unicode(2000), nullable=True)
+    email       = Column('EMAIL', Unicode(2000), nullable=True)
+    paid        = Column('PAID', Integer, nullable=True)
     candy1      = Column('CANDY1', Integer, nullable=True, default=0)
     candy2      = Column('CANDY2', Integer, nullable=True, default=0)
     candy3      = Column('CANDY3', Integer, nullable=True, default=0)
@@ -268,7 +272,7 @@ class Fundraiser(Base):
         total += (self.candy11 * 6.50)
         total += (self.candy12 * 6.50)
         total += (self.candy13 * 16.5)
-        return price(total)
+        return price(total, 0)
 
     def create(self, params):
         self.setParams(params)
