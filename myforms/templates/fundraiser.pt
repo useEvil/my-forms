@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <form id="order-form" style="width: 95%" onSubmit="return false;">
-                    <table id="orders" cellpadding="5" style="border-collapse: collapse;table-layout: auto;width: auto;border-spacing: 5px;border: 3px solid #fff;">
+                    <table id="orders" cellpadding="3" style="border-collapse: collapse;table-layout: auto;width: auto;border-spacing: 5px;border: 3px solid #fff;">
                         <tr>
                             <td style="font-size: 8pt;">
                                 <blockquote>
@@ -41,9 +41,7 @@
                                 Fill in order form with your name and desired amounts.<br /><br />
                                 Or use the attached PDF order <a href="http://fundraiser.thaiandhien.com/2011-Winter-Fundraiser.pdf" target="_order">form</a>.<br /><br />
                                 Thank you in advanced for all your help,<br /><br />
-
                                 The Nguyen Family<br /><br />
-
                                 (click name to view image)<br />
                                 (click total to pay via <strong style="color: #364CC4;">PayPal</strong>)<br />
                                 </blockquote>
@@ -98,7 +96,7 @@
                         </tr>
                         <tr tal:repeat="order orders" style="background-color: #e6e6e6;border: 5px solid #fff;">
                             <td tal:condition="not order.paid" tal:content="order.name" tal:attributes="title order.email" style="color: #00000;">Name</td>
-                            <td tal:condition="order.paid" tal:attributes="title order.email" style="color: #364CC4;"><span tal:content="order.name">Name</span> <span style="font-size: 8pt;">(paid)</span></td>
+                            <td tal:condition="order.paid" style="color: #364CC4;"><span tal:content="order.name" tal:attributes="title order.email">Name</span> <span style="font-size: 8pt;">(paid)</span></td>
                             <td tal:content="order.candy1">#</td>
                             <td tal:content="order.candy2">#</td>
                             <td tal:content="order.candy3">#</td>
