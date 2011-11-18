@@ -227,17 +227,11 @@ function submitOrder(event, id) {
 }
 
 function submitPayPal(event, id) {
-    var params = $('#pay-now').serialize() + '&amount=' + this.innerHTML + '&order_id=' + this.id;
-    $.ajax(
-        {
-            url: 'https://www.paypal.com/cgi-bin/webscr',
-            type: 'post',
-            data: params,
-            timeout: 10000,
-            error: failedEntryForm,
-            success: updateStatus,
-        }
-    );
+    $('#amount').attr('value', this.innerHTML);
+    $('#item_number').attr('value', this.id);
+    $('#pay-now').submit();
+    $.getJSON('/REST/forms/paid/'+this.id, updateStatus);
+    return;
 }
 
 function showEntryForm(event) {
