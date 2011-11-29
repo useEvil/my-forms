@@ -46,22 +46,21 @@ def iphone(request):
 
 def fundraiser(request):
     orders = Fundraiser().getAll()
-    totals = {
-        'candy1': Fundraiser().getTotals(orders, 'candy1'),
-        'candy2': Fundraiser().getTotals(orders, 'candy2'),
-        'candy3': Fundraiser().getTotals(orders, 'candy3'),
-        'candy4': Fundraiser().getTotals(orders, 'candy4'),
-        'candy5': Fundraiser().getTotals(orders, 'candy5'),
-        'candy6': Fundraiser().getTotals(orders, 'candy6'),
-        'candy7': Fundraiser().getTotals(orders, 'candy7'),
-        'candy8': Fundraiser().getTotals(orders, 'candy8'),
-        'candy9': Fundraiser().getTotals(orders, 'candy9'),
-        'candy10': Fundraiser().getTotals(orders, 'candy10'),
-        'candy11': Fundraiser().getTotals(orders, 'candy11'),
-        'candy12': Fundraiser().getTotals(orders, 'candy12'),
-        'candy13': Fundraiser().getTotals(orders, 'candy13')
-    }
-    return { 'h': h, 'orders': orders, 'totals': totals }
+    total  = Fundraiser()
+    total.candy1  = Fundraiser().getTotals(orders, 'candy1')
+    total.candy2  = Fundraiser().getTotals(orders, 'candy2')
+    total.candy3  = Fundraiser().getTotals(orders, 'candy3')
+    total.candy4  = Fundraiser().getTotals(orders, 'candy4')
+    total.candy5  = Fundraiser().getTotals(orders, 'candy5')
+    total.candy6  = Fundraiser().getTotals(orders, 'candy6')
+    total.candy7  = Fundraiser().getTotals(orders, 'candy7')
+    total.candy8  = Fundraiser().getTotals(orders, 'candy8')
+    total.candy9  = Fundraiser().getTotals(orders, 'candy9')
+    total.candy10 = Fundraiser().getTotals(orders, 'candy10')
+    total.candy11 = Fundraiser().getTotals(orders, 'candy11')
+    total.candy12 = Fundraiser().getTotals(orders, 'candy12')
+    total.candy13 = Fundraiser().getTotals(orders, 'candy13')
+    return { 'h': h, 'orders': orders, 'total': total }
 
 def reports(request):
     return { 'h': h }

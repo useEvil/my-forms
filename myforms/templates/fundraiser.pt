@@ -115,20 +115,20 @@
                         </tr>
                         <tr style="background-color: #C0C0C0;border: 5px solid #fff;">
                             <td>&nbsp;</td>
-                            <td tal:content="totals['candy1']">#</td>
-                            <td tal:content="totals['candy2']">#</td>
-                            <td tal:content="totals['candy3']">#</td>
-                            <td tal:content="totals['candy4']">#</td>
-                            <td tal:content="totals['candy5']">#</td>
-                            <td tal:content="totals['candy6']">#</td>
-                            <td tal:content="totals['candy7']">#</td>
-                            <td tal:content="totals['candy8']">#</td>
-                            <td tal:content="totals['candy9']">#</td>
-                            <td tal:content="totals['candy10']">#</td>
-                            <td tal:content="totals['candy11']">#</td>
-                            <td tal:content="totals['candy12']">#</td>
-                            <td tal:content="totals['candy13']">#</td>
-                            <td>&nbsp;</td>
+                            <td tal:content="total.candy1">#</td>
+                            <td tal:content="total.candy2">#</td>
+                            <td tal:content="total.candy3">#</td>
+                            <td tal:content="total.candy4">#</td>
+                            <td tal:content="total.candy5">#</td>
+                            <td tal:content="total.candy6">#</td>
+                            <td tal:content="total.candy7">#</td>
+                            <td tal:content="total.candy8">#</td>
+                            <td tal:content="total.candy9">#</td>
+                            <td tal:content="total.candy10">#</td>
+                            <td tal:content="total.candy11">#</td>
+                            <td tal:content="total.candy12">#</td>
+                            <td tal:content="total.candy13">#</td>
+                            <td>$<span tal:content="total.total_price()">$$</span></td>
                         </tr>
                     </table>
                 </form>

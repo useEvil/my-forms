@@ -229,9 +229,7 @@ function submitOrder(event, id) {
 function submitPayPal(event, id) {
     $('#amount').attr('value', this.innerHTML);
     $('#item_number').attr('value', this.id);
-    $('#pay-now').submit();
-    $.getJSON('/REST/forms/paid/'+this.id, updateStatus);
-    return;
+    $.getJSON('/REST/forms/paid/'+this.id, updatePayPal);
 }
 
 function showEntryForm(event) {
@@ -320,6 +318,11 @@ function updateEntryForm(data) {
     } else {
         window.location.replace('/');
     }
+}
+
+function updatePayPal(data) {
+    $('#pay-now').submit();
+    return;
 }
 
 function updateOrderList(data) {
