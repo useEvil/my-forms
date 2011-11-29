@@ -61,7 +61,21 @@ def fundraiser(request):
         'candy12': Fundraiser().getTotals(orders, 'candy12'),
         'candy13': Fundraiser().getTotals(orders, 'candy13')
     }
-    return { 'h': h, 'orders': orders, 'totals': totals }
+    total = Fundraiser()
+    total.candy1  = totals['candy1']
+    total.candy2  = totals['candy2']
+    total.candy3  = totals['candy3']
+    total.candy4  = totals['candy4']
+    total.candy5  = totals['candy5']
+    total.candy6  = totals['candy6']
+    total.candy7  = totals['candy7']
+    total.candy8  = totals['candy8']
+    total.candy9  = totals['candy9']
+    total.candy10 = totals['candy10']
+    total.candy11 = totals['candy11']
+    total.candy12 = totals['candy12']
+    total.candy13 = totals['candy13']
+    return { 'h': h, 'orders': orders, 'totals': totals, 'total': total.total_price() }
 
 def reports(request):
     return { 'h': h }

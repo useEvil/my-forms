@@ -128,7 +128,7 @@
                             <td tal:content="totals['candy11']">#</td>
                             <td tal:content="totals['candy12']">#</td>
                             <td tal:content="totals['candy13']">#</td>
-                            <td>&nbsp;</td>
+                            <td>$<span tal:content="total">$$</span></td>
                         </tr>
                     </table>
                 </form>
