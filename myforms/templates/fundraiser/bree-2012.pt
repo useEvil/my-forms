@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
     <head>
-        <title>See's Candy Fundraiser for Bree Nguyen</title>
+        <title>2012 See's Candy Fundraiser for Bree Nguyen</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
         <meta name="keywords" content="python web application tool" />
         <meta name="description" content="pyramid web application" />
@@ -22,7 +22,7 @@
         <div id="wrap">
             <div id="top">
                 <div class="top align-center">
-                    <h1>See's Candy Fundraiser for Bree Nguyen</h1>
+                    <h1>2012 See's Candy Fundraiser for Bree Nguyen</h1>
                 </div>
             </div>
             <div id="middle">
@@ -36,29 +36,28 @@
                         <tr>
                             <td style="font-size: 8pt;">
                                 <blockquote>
-                                <strong>Nov. 14, 2011</strong> - Starts<br />
-                                <strong>Nov. 30, 2011</strong> - Ends<br /><br />
+                                <strong>March 7, 2012</strong> - Starts<br />
+                                <strong>March 30, 2012</strong> - Ends<br /><br />
                                 Fill in order form with your name and desired amounts.<br /><br />
-                                Or use the attached PDF order <a href="http://fundraiser.thaiandhien.com/2011-Winter-Fundraiser.pdf" target="_order">form</a>.<br /><br />
                                 Thank you in advanced for all your help,<br /><br />
                                 The Nguyen Family<br /><br />
                                 (click name to view image)<br />
                                 (click total to pay via <strong style="color: #364CC4;">PayPal</strong>)<br />
                                 </blockquote>
                             </td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy1">$18.90 - 1lb. Truffles (#902)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy2">$16.50 - 1lb. Assorted Chocolates (#318)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy3">$16.50 - 1lb. Milk Chocolates (#326)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy3">$16.50 - 1lb. Dark Chocolates (#330)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy4">$16.50 - 1lb. Nuts & Chews (#334)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy5">$16.50 - 1lb. Toffee-ettes (#316)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy6">$15.90 - 1lb. 8oz. Peanut Brittle (#355)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy7">$8.25 - 8oz. Assorted Molasses Chips (#360)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy8">$8.25 - 8oz. Peppermints (#358)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy9">$15.80 - 1lb. 5oz. Gourmet Lollypops (#296)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy10">$6.50 - 4oz. Jolly Snowman Box (#9127)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy11">$6.50 - 4oz. Mini Holiday Fancy Box (#596)</span></td>
-                            <td style="height: 300px;width: 10px;"><span class="verticaltext show-candy" id="candy12">$16.50 - 1lb. Gift Certificate (#767) US Only</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy1">$19.40 - 1lb. Truffles (#902)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy2">$16.90 - 1lb. Assorted Chocolates (#318)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy3">$16.90 - 1lb. Nuts & Chews (#334)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy4">$16.90 - 1lb. Toffee-ettes (#316)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy5">$16.50 - 1lb. 8oz. Peanut Brittle (#355)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy6">$8.45 - 8oz. Assorted Molasses Chips (#360)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy7">$16.20 - 1lb. 5oz. Gourmet Lollypops (#296)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy8">$6.80 - 4.8oz. Marshmallow Eggs (#731)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy9">$6.80 - 4oz. Peanut Butter Egg (#939)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy10">$6.80 - 4oz. Milk Chocolate Butter Egg (#734)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy11">$6.80 - 4oz. Bordeaux Egg (#486)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy12">$6.80 - 4oz. Bunny & Carrot Box (#179)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy13">$16.90 - 1lb. Gift Certificate (#767) US Only</span></td>
                         </tr>
                         <tr style="border-bottom: 3px solid #373839;">
                             <td>Name &amp; Email</td>
@@ -139,7 +138,7 @@
                     <input type="hidden" name="amount" value="" id="amount">
                     <input type="hidden" name="order_id" value="" id="item_number">
                     <input type="hidden" name="shopping_url" value="http://fundraiser.thaiandhien.com/" id="shopping_url">
-                    <input type="hidden" name="item_name" value="See's Candy Fundraiser">
+                    <input type="hidden" name="item_name" value="Bree's See's Candy Fundraiser 2012">
                     <input type="hidden" name="currency_code" value="USD">
                     <input type="hidden" name="button_subtype" value="services">
                     <input type="hidden" name="bn" value="PP-BuyNowBF:btn_paynow_SM.gif:NonHosted">

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+    <head>
+        <title>2011 See's Candy Fundraiser for Bree Nguyen</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <meta name="keywords" content="python web application tool" />
+        <meta name="description" content="pyramid web application" />
+        <link rel="shortcut icon" href="${request.static_url('myforms:static/images/favicon.ico')}" />
+        <link rel="stylesheet" href="${request.static_url('myforms:static/css/my-forms.css')}" type="text/css" media="screen" charset="utf-8" />
+        <link rel="stylesheet" href="${request.static_url('myforms:static/css/ui-lightness/jquery-ui.css')}" type="text/css" media="screen" charset="utf-8" />
+        <!--[if lte IE 6]>
+        <link rel="stylesheet" href="${request.static_url('myforms:static/ie6.css')}" type="text/css" media="screen" charset="utf-8" />
+        <![endif]-->
+    </head>
+    <body>
+        <!-- The dark background -->
+        <div class="background-cover">&nbsp;</div>
+        <div class="background-cover-top">&nbsp;</div>
+        <div id="overlay-box-loading" class="overlay-loading">
+            <p>Processing&nbsp;...&nbsp;Please Wait</p>
+        </div>
+        <div id="wrap">
+            <div id="top">
+                <div class="top align-center">
+                    <h1>2011 See's Candy Fundraiser for Bree Nguyen</h1>
+                </div>
+            </div>
+            <div id="middle">
+                <div id="overlay-box-image" class="overlay-image">
+                    <div class="overlay-content" id="close-candy">
+                        <img src="/static/images/trans.gif" id="image_layer_src" alt="View Image" title="View Image" />
+                    </div>
+                </div>
+                <form id="order-form" style="width: 95%" onSubmit="return false;">
+                    <table id="orders" cellpadding="3" style="border-collapse: collapse;table-layout: auto;width: auto;border-spacing: 5px;border: 3px solid #fff;">
+                        <tr>
+                            <td style="font-size: 8pt;">
+                                <blockquote>
+                                <strong>Nov. 14, 2011</strong> - Starts<br />
+                                <strong>Nov. 30, 2011</strong> - Ends<br /><br />
+                                Fill in order form with your name and desired amounts.<br /><br />
+                                Or use the attached PDF order <a href="http://fundraiser.thaiandhien.com/2011-Winter-Fundraiser.pdf" target="_order">form</a>.<br /><br />
+                                Thank you in advanced for all your help,<br /><br />
+                                The Nguyen Family<br /><br />
+                                (click name to view image)<br />
+                                (click total to pay via <strong style="color: #364CC4;">PayPal</strong>)<br />
+                                </blockquote>
+                            </td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy1">$18.90 - 1lb. Truffles (#902)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy2">$16.50 - 1lb. Assorted Chocolates (#318)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy3">$16.50 - 1lb. Milk Chocolates (#326)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy3">$16.50 - 1lb. Dark Chocolates (#330)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy4">$16.50 - 1lb. Nuts & Chews (#334)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy5">$16.50 - 1lb. Toffee-ettes (#316)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy6">$15.90 - 1lb. 8oz. Peanut Brittle (#355)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy7">$8.25 - 8oz. Assorted Molasses Chips (#360)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy8">$8.25 - 8oz. Peppermints (#358)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy9">$15.80 - 1lb. 5oz. Gourmet Lollypops (#296)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy10">$6.50 - 4oz. Jolly Snowman Box (#9127)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy11">$6.50 - 4oz. Mini Holiday Fancy Box (#596)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy12">$16.50 - 1lb. Gift Certificate (#767) US Only</span></td>
+                        </tr>
+                        <tr style="border-bottom: 3px solid #373839;">
+                            <td>Name &amp; Email</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr class="new-order">
+                            <td nowrap><input type="text" name="name" value="" size="20" maxlength="200" /><input type="text" name="email" value="" size="20" maxlength="200" /></td>
+                            <td><input type="text" name="candy1" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy2" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy3" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy4" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy5" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy6" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy7" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy8" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy9" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy10" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy11" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy12" value="" size="2" maxlength="2" /></td>
+                            <td><input type="text" name="candy13" value="" size="2" maxlength="2" /></td>
+                            <td><input type="image" name="new" id="new-order" src="/static/images/add.png" /></td>
+                        </tr>
+                        <tr tal:repeat="order orders" style="background-color: #e6e6e6;border: 5px solid #fff;">
+                            <td tal:condition="not order.paid" tal:content="order.name" tal:attributes="title order.email" style="color: #00000;">Name</td>
+                            <td tal:condition="order.paid" style="color: #364CC4;"><span tal:content="order.name" tal:attributes="title order.email">Name</span> <span style="font-size: 8pt;">(paid)</span></td>
+                            <td tal:content="order.candy1">#</td>
+                            <td tal:content="order.candy2">#</td>
+                            <td tal:content="order.candy3">#</td>
+                            <td tal:content="order.candy4">#</td>
+                            <td tal:content="order.candy5">#</td>
+                            <td tal:content="order.candy6">#</td>
+                            <td tal:content="order.candy7">#</td>
+                            <td tal:content="order.candy8">#</td>
+                            <td tal:content="order.candy9">#</td>
+                            <td tal:content="order.candy10">#</td>
+                            <td tal:content="order.candy11">#</td>
+                            <td tal:content="order.candy12">#</td>
+                            <td tal:content="order.candy13">#</td>
+                            <td tal:condition="not order.paid">$<a href="#" class="pay-now" tal:content="order.total_price()" tal:attributes="id order.id">$$</a></td>
+                            <td tal:condition="order.paid">$<span tal:content="order.total_price()">$$</span></td>
+                        </tr>
+                        <tr style="background-color: #C0C0C0;border: 5px solid #fff;">
+                            <td>&nbsp;</td>
+                            <td tal:content="total.candy1">#</td>
+                            <td tal:content="total.candy2">#</td>
+                            <td tal:content="total.candy3">#</td>
+                            <td tal:content="total.candy4">#</td>
+                            <td tal:content="total.candy5">#</td>
+                            <td tal:content="total.candy6">#</td>
+                            <td tal:content="total.candy7">#</td>
+                            <td tal:content="total.candy8">#</td>
+                            <td tal:content="total.candy9">#</td>
+                            <td tal:content="total.candy10">#</td>
+                            <td tal:content="total.candy11">#</td>
+                            <td tal:content="total.candy12">#</td>
+                            <td tal:content="total.candy13">#</td>
+                            <td>$<span tal:content="total.total_price()">$$</span></td>
+                        </tr>
+                    </table>
+                </form>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="pay-now" class="hidden" target="_parent">
+                    <input type="hidden" name="cmd" value="_xclick">
+                    <input type="hidden" name="business" value="useEvil@gmail.com">
+                    <input type="hidden" name="lc" value="US">
+                    <input type="hidden" name="amount" value="" id="amount">
+                    <input type="hidden" name="order_id" value="" id="item_number">
+                    <input type="hidden" name="shopping_url" value="http://fundraiser.thaiandhien.com/" id="shopping_url">
+                    <input type="hidden" name="item_name" value="Bree's See's Candy Fundraiser 2011">
+                    <input type="hidden" name="currency_code" value="USD">
+                    <input type="hidden" name="button_subtype" value="services">
+                    <input type="hidden" name="bn" value="PP-BuyNowBF:btn_paynow_SM.gif:NonHosted">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+            </div>
+            <div id="bottom">
+                <div class="bottom">
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+          <div class="footer">&copy; Copyright 2011, Thai Nguyen.</div>
+        </div>
+    </body>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/static/js/my-forms.js"></script>
+</html>

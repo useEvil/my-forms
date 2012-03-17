@@ -45,7 +45,12 @@ def iphone(request):
     return { 'h': h, 'recent': recent }
 
 def fundraiser(request):
-    orders = Fundraiser().getAll()
+    if not request.matchdict.has_key('child'): return
+    if not request.matchdict.has_key('start'): return
+    if not request.matchdict.has_key('end'):   return
+    start = date.datetime.strptime(request.matchdict['start'], h.getSettings('date.short'))
+    end   = date.datetime.strptime(request.matchdict['end'], h.getSettings('date.short'))
+    orders = Fundraiser().getByCreatedDate(start, end)
     total  = Fundraiser()
     total.candy1  = Fundraiser().getTotals(orders, 'candy1')
     total.candy2  = Fundraiser().getTotals(orders, 'candy2')

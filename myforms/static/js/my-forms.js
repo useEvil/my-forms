@@ -282,7 +282,7 @@ function showReports(event) {
 }
 
 function showImage(event) {
-    var src = '/static/images/fundraiser/'+this.id+'.jpg';
+    var src = 'http://fundraiser.thaiandhien.com/fundraiser-bree-2012/'+this.id+'.jpg';
     formID  = 'image';
     $('#image_layer_src').attr('src', src);
     doOverlayOpen(formID, 25);
