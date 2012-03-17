@@ -330,7 +330,7 @@ function updatePayPal(data) {
 function updateOrderList(data) {
     updateStatus(data);
     if (data['status'] != 200) return;
-    window.location.reload();
+    reloadPage();
 }
 
 function updateStatus(data) {

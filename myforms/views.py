@@ -49,6 +49,7 @@ def iphone(request):
 
 def fundraiser(request):
     if not request.matchdict.has_key('child'): return
+    if not request.matchdict.has_key('year'):  return
     if not request.matchdict.has_key('start'): return
     if not request.matchdict.has_key('end'):   return
     if request.params.has_key('id') and request.params.get('id'):
@@ -59,12 +60,15 @@ def fundraiser(request):
             order.paid = 1
         except:
             log.debug('==== failed to set paid for id [%s]'%(id))
+    child  = request.matchdict['child']
+    year   = request.matchdict['year']
     start  = date.datetime.strptime(request.matchdict['start'], h.getSettings('date.short'))
     end    = date.datetime.strptime(request.matchdict['end'], h.getSettings('date.short'))
     orders = Fundraiser().getByCreatedDate(start, end)
     total  = Fundraiser().getTotalsData(start, end)
     grand  = Fundraiser().total_price(total[0])
-    return { 'h': h, 'orders': orders, 'total': total[0], 'grand_total': grand }
+    data   = { 'h': h, 'orders': orders, 'total': total[0], 'grand_total': grand, 'onsale': end >= date.datetime.today() }
+    return render_to_response('templates/fundraiser/'+child+'-'+year+'.pt', data, request=request)
 
 def reports(request):
     return { 'h': h }

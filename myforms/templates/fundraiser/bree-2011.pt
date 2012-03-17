@@ -92,7 +92,7 @@
                             <td><input type="text" name="candy11" value="" size="2" maxlength="2" /></td>
                             <td><input type="text" name="candy12" value="" size="2" maxlength="2" /></td>
                             <td><input type="text" name="candy13" value="" size="2" maxlength="2" /></td>
-                            <td><input type="image" name="new" id="new-order" src="/static/images/add.png" /></td>
+                            <td><input type="image" name="new" id="new-order" src="/static/images/add.png" tal:condition="onsale" /></td>
                         </tr>
                         <tr tal:repeat="order orders" style="background-color: #e6e6e6;border: 5px solid #fff;">
                             <td tal:condition="not order.paid" tal:content="order.name" tal:attributes="title order.email" style="color: #00000;">Name</td>
@@ -128,7 +128,7 @@
                             <td tal:content="total.candy11">#</td>
                             <td tal:content="total.candy12">#</td>
                             <td tal:content="total.candy13">#</td>
-                            <td>$<span tal:content="total.total_price()">$$</span></td>
+                            <td>$<span tal:content="grand_total">$$</span></td>
                         </tr>
                     </table>
                 </form>
@@ -138,7 +138,7 @@
                     <input type="hidden" name="lc" value="US">
                     <input type="hidden" name="amount" value="" id="amount">
                     <input type="hidden" name="order_id" value="" id="item_number">
-                    <input type="hidden" name="shopping_url" value="http://fundraiser.thaiandhien.com/" id="shopping_url">
+                    <input type="hidden" name="shopping_url" value="http://fundraiser.thaiandhien.com/?id=" id="shopping_url">
                     <input type="hidden" name="item_name" value="Bree's See's Candy Fundraiser 2011">
                     <input type="hidden" name="currency_code" value="USD">
                     <input type="hidden" name="button_subtype" value="services">

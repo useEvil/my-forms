@@ -16,7 +16,7 @@ def main(global_config, **settings):
     config.add_route('index', '/', view='myforms.views.index', view_renderer='templates/index.pt')
     config.add_route('reports', '/reports', view='myforms.views.reports', view_renderer='templates/reports.pt')
     config.add_route('iphone', '/iphone', view='myforms.views.iphone', view_renderer='templates/iphone/index.pt')
-    config.add_route('fundraiser', '/fundraiser/{child}/{start}/{end}', view='myforms.views.fundraiser', view_renderer='templates/fundraiser/bree-2012.pt')
+    config.add_route('fundraiser', '/fundraiser/{child}/{year}/{start}/{end}', view='myforms.views.fundraiser', view_renderer='templates/fundraiser/bree-2012.pt')
     # JSON REST
     config.add_route('rest_listing', '/REST/forms/listing', view='myforms.rest.listing', renderer='json', request_method='GET')
     config.add_route('rest_reporting', '/REST/forms/reporting', view='myforms.rest.reporting', renderer='json', request_method='GET')

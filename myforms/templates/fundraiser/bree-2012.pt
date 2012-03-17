@@ -91,7 +91,7 @@
                             <td><input type="text" name="candy11" value="" size="2" maxlength="2" /></td>
                             <td><input type="text" name="candy12" value="" size="2" maxlength="2" /></td>
                             <td><input type="text" name="candy13" value="" size="2" maxlength="2" /></td>
-                            <td><input type="image" name="new" id="new-order" src="/static/images/add.png" /></td>
+                            <td><input type="image" name="new" id="new-order" src="/static/images/add.png" tal:condition="onsale" /></td>
                         </tr>
                         <tr tal:repeat="order orders" style="background-color: #e6e6e6;border: 5px solid #fff;">
                             <td tal:condition="not order.paid" tal:content="order.name" tal:attributes="title order.email" style="color: #00000;">Name</td>
@@ -152,7 +152,7 @@
             </div>
         </div>
         <div id="footer">
-          <div class="footer">&copy; Copyright 2011, Thai Nguyen.</div>
+          <div class="footer">&copy; Copyright 2012, Thai Nguyen.</div>
         </div>
     </body>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
