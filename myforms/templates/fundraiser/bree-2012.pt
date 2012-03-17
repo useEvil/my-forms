@@ -42,7 +42,11 @@
                                 Thank you in advanced for all your help,<br /><br />
                                 The Nguyen Family<br /><br />
                                 (click name to view image)<br />
-                                (click total to pay via <strong style="color: #364CC4;">PayPal</strong>)<br />
+                                (click total to pay via <strong style="color: #364CC4;">PayPal</strong>)<br /><br />
+                                <select id="archive" name="archive">
+                                    <option value="">Show Fundraiser</option>
+                                    <option value="2011/2011-11-14/2011-11-30">2011</option>
+                                </select>
                                 </blockquote>
                             </td>
                             <td class="td-candy"><span class="verticaltext show-candy" id="candy1">$19.40 - 1lb. Truffles (#902)</span></td>

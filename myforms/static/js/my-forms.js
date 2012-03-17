@@ -19,6 +19,7 @@ $('.pay-now').live('click', submitPayPal);
 $('.show-candy').live('click', showImage);
 $('#close-candy').live('click', closeImage);
 $('#new-order').live('click', submitOrder);
+$('#archive').live('click', showArchive);
 
 
 /* Binds */
@@ -276,11 +277,11 @@ function showViewEntry(event) {
 }
 
 function showIndexPage(event) {
-    window.location.href = '/';
+    window.location.replace('/');
 }
 
 function showReports(event) {
-    window.location.href = '/reports';
+    window.location.replace('/reports');
 }
 
 function showImage(event) {
@@ -288,6 +289,12 @@ function showImage(event) {
     formID  = 'image';
     $('#image_layer_src').attr('src', src);
     doOverlayOpen(formID, 25);
+}
+
+function showArchive(event) {
+    if (!$('#'+this.id+' option:selected').val()) return;
+    var src = 'http://fundraiser.thaiandhien.com/?archive='+$('#'+this.id+' option:selected').val();
+    window.location.replace(src);
 }
 
 function closeImage(event) {
