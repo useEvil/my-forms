@@ -106,23 +106,23 @@ def reports(request):
     return data
 
 def orders(request):
-    orders = Fundraiser().getGraphingData()
+    orders = Fundraiser().getByCreatedDate()
     list   = { 'candy1': [], 'candy2': [], 'candy3': [], 'candy4': [], 'candy5': [], 'candy6': [], 'candy7': [], 'candy8': [], 'candy9': [], 'candy10': [], 'candy11': [], 'candy12': [], 'candy13': [] }
     print '==== orders [%s]'%(orders)
     for order in orders:
-        list['candy1'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy1])
-        list['candy2'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy2])
-        list['candy3'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy3])
-        list['candy4'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy4])
-        list['candy5'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy5])
-        list['candy6'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy6])
-        list['candy7'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy7])
-        list['candy8'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy8])
-        list['candy9'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy9])
-        list['candy10'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy10])
-        list['candy11'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy11])
-        list['candy12'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy12])
-        list['candy13'].append([order.createdDate.strftime(getSettings('date.short')), order.total_candy13])
+        list['candy1'].append([order.createdDate.strftime(getSettings('date.short')), order.candy1])
+        list['candy2'].append([order.createdDate.strftime(getSettings('date.short')), order.candy2])
+        list['candy3'].append([order.createdDate.strftime(getSettings('date.short')), order.candy3])
+        list['candy4'].append([order.createdDate.strftime(getSettings('date.short')), order.candy4])
+        list['candy5'].append([order.createdDate.strftime(getSettings('date.short')), order.candy5])
+        list['candy6'].append([order.createdDate.strftime(getSettings('date.short')), order.candy6])
+        list['candy7'].append([order.createdDate.strftime(getSettings('date.short')), order.candy7])
+        list['candy8'].append([order.createdDate.strftime(getSettings('date.short')), order.candy8])
+        list['candy9'].append([order.createdDate.strftime(getSettings('date.short')), order.candy9])
+        list['candy10'].append([order.createdDate.strftime(getSettings('date.short')), order.candy10])
+        list['candy11'].append([order.createdDate.strftime(getSettings('date.short')), order.candy11])
+        list['candy12'].append([order.createdDate.strftime(getSettings('date.short')), order.candy12])
+        list['candy13'].append([order.createdDate.strftime(getSettings('date.short')), order.candy13])
     data   = [
         {
             'label': "Truffles (#902)",

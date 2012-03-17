@@ -1,3 +1,4 @@
+import logging
 import datetime as date
 import myforms.helpers as h
 
@@ -7,6 +8,8 @@ from myforms.models import MyModel
 
 from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render_to_response
+
+log = logging.getLogger(__name__)
 
 def my_view(request):
     root = DBSession().query(MyModel).filter(MyModel.name==u'root').first()
@@ -48,24 +51,20 @@ def fundraiser(request):
     if not request.matchdict.has_key('child'): return
     if not request.matchdict.has_key('start'): return
     if not request.matchdict.has_key('end'):   return
-    start = date.datetime.strptime(request.matchdict['start'], h.getSettings('date.short'))
-    end   = date.datetime.strptime(request.matchdict['end'], h.getSettings('date.short'))
+    if request.params.has_key('id') and request.params.get('id'):
+        id = request.params.get('id')
+        log.debug('==== id [%s]'%(id))
+        try:
+            order = Fundraiser().getById(id)
+            order.paid = 1
+        except:
+            log.debug('==== failed to set paid for id [%s]'%(id))
+    start  = date.datetime.strptime(request.matchdict['start'], h.getSettings('date.short'))
+    end    = date.datetime.strptime(request.matchdict['end'], h.getSettings('date.short'))
     orders = Fundraiser().getByCreatedDate(start, end)
-    total  = Fundraiser()
-    total.candy1  = Fundraiser().getTotals(orders, 'candy1')
-    total.candy2  = Fundraiser().getTotals(orders, 'candy2')
-    total.candy3  = Fundraiser().getTotals(orders, 'candy3')
-    total.candy4  = Fundraiser().getTotals(orders, 'candy4')
-    total.candy5  = Fundraiser().getTotals(orders, 'candy5')
-    total.candy6  = Fundraiser().getTotals(orders, 'candy6')
-    total.candy7  = Fundraiser().getTotals(orders, 'candy7')
-    total.candy8  = Fundraiser().getTotals(orders, 'candy8')
-    total.candy9  = Fundraiser().getTotals(orders, 'candy9')
-    total.candy10 = Fundraiser().getTotals(orders, 'candy10')
-    total.candy11 = Fundraiser().getTotals(orders, 'candy11')
-    total.candy12 = Fundraiser().getTotals(orders, 'candy12')
-    total.candy13 = Fundraiser().getTotals(orders, 'candy13')
-    return { 'h': h, 'orders': orders, 'total': total }
+    total  = Fundraiser().getTotalsData(start, end)
+    grand  = Fundraiser().total_price(total[0])
+    return { 'h': h, 'orders': orders, 'total': total[0], 'grand_total': grand }
 
 def reports(request):
     return { 'h': h }

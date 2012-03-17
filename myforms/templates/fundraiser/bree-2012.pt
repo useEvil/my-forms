@@ -127,17 +127,18 @@
                             <td tal:content="total.candy11">#</td>
                             <td tal:content="total.candy12">#</td>
                             <td tal:content="total.candy13">#</td>
-                            <td>$<span tal:content="total.total_price()">$$</span></td>
+                            <td>$<span tal:content="grand_total">$$</span></td>
                         </tr>
                     </table>
                 </form>
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="pay-now" class="hidden" target="_parent">
+                <!--form action="http://fundraiser.thaiandhien.com/?id=" method="get" id="pay-now" class="hidden" target="_parent"-->
                     <input type="hidden" name="cmd" value="_xclick">
                     <input type="hidden" name="business" value="useEvil@gmail.com">
                     <input type="hidden" name="lc" value="US">
                     <input type="hidden" name="amount" value="" id="amount">
                     <input type="hidden" name="order_id" value="" id="item_number">
-                    <input type="hidden" name="shopping_url" value="http://fundraiser.thaiandhien.com/" id="shopping_url">
+                    <input type="hidden" name="shopping_url" value="http://fundraiser.thaiandhien.com/?id=" id="shopping_url">
                     <input type="hidden" name="item_name" value="Bree's See's Candy Fundraiser 2012">
                     <input type="hidden" name="currency_code" value="USD">
                     <input type="hidden" name="button_subtype" value="services">

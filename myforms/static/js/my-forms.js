@@ -229,7 +229,9 @@ function submitOrder(event, id) {
 function submitPayPal(event, id) {
     $('#amount').attr('value', this.innerHTML);
     $('#item_number').attr('value', this.id);
-    $.getJSON('/REST/forms/paid/'+this.id, updatePayPal);
+    $('#shopping_url').attr('value', $('#shopping_url').val() + this.id);
+    $('#pay-now').submit();
+//    $.getJSON('/REST/forms/paid/'+this.id, updatePayPal);
 }
 
 function showEntryForm(event) {
@@ -328,7 +330,7 @@ function updatePayPal(data) {
 function updateOrderList(data) {
     updateStatus(data);
     if (data['status'] != 200) return;
-    window.location.replace('/fundraiser');
+    window.location.reload();
 }
 
 function updateStatus(data) {
