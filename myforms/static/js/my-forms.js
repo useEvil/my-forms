@@ -30,6 +30,9 @@ $(document).ready(function() {
     if (window.location.href.indexOf('iphone') > -1) {
         isPhone = 1;
     }
+    if (window.location.href.indexOf('thanks') > -1) {
+        showMessage('SUCCESS', 'Thank you for your generous Donation.');
+    }
     clearMessage();
     initDatePickers();
 });
@@ -297,13 +300,28 @@ function showArchive(event) {
     window.location.replace(src);
 }
 
+function showMessage( result, message ) {
+    $('#notification').notify({
+        speed: 500,
+        expires: 7000
+    });
+    $('#notification').notify('create', {
+        title: result,
+        text:  message
+    });
+}
+
 function closeImage(event) {
     formID = 'image';
     doOverlayClose(formID, 25);
 }
 
-function reloadPage() {
-    window.location.reload();
+function reloadPage(params) {
+    if (params) {
+        window.location.replace(window.location.href + params);
+    } else {
+        window.location.reload();
+    }
 }
 
 function deleteEntry(event) {
@@ -337,7 +355,7 @@ function updatePayPal(data) {
 function updateOrderList(data) {
     updateStatus(data);
     if (data['status'] != 200) return;
-    reloadPage();
+    reloadPage('?thanks=1');
 }
 
 function updateStatus(data) {

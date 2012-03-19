@@ -8,6 +8,7 @@ import webhelpers.paginate as paginate
 
 from re import findall
 from operator import itemgetter, attrgetter
+from subprocess import call
 
 from myforms.models import DBSession
 from myforms.models import TwitterStatus, HundredPushups, Fundraiser
@@ -188,6 +189,7 @@ def new(request):
         order.create(params)
     except:
         return { 'status': 404, 'message': 'Failed to Create New Order' }
+    call("/Users/useevil/Documents/Playground/bin/notifo.pl -message=\"%s bought candy for Bree's Fundraiser.\" -title=\"2012 Fundraiser for Bree\""%(params['name']), shell=True)
     return { 'status': 200, 'message': 'Successfully Created New Order' }
 
 def create(request):

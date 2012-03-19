@@ -158,8 +158,19 @@
         <div id="footer">
           <div class="footer">&copy; Copyright 2012, Thai Nguyen.</div>
         </div>
+        <div id="notification" clas="hidden">
+            <div id="basic-template">
+                <a class="ui-notify-cross ui-notify-close" href="#"><img src="/static/images/close.png" width="24" /></a>
+                <h1>#{title}</h1>
+                <p>#{text}</p>
+            </div>
+            <div id="advanced-template">
+                <!-- ... you get the idea ... -->
+            </div>
+        </div>
     </body>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.notify.js"></script>
     <script type="text/javascript" src="/static/js/my-forms.js"></script>
 </html>

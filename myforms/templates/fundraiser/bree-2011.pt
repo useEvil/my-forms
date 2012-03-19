@@ -39,7 +39,6 @@
                                 <strong>Nov. 14, 2011</strong> - Starts<br />
                                 <strong>Nov. 30, 2011</strong> - Ends<br /><br />
                                 Fill in order form with your name and desired amounts.<br /><br />
-                                Or use the attached PDF order <a href="http://fundraiser.thaiandhien.com/2011-Winter-Fundraiser.pdf" target="_order">form</a>.<br /><br />
                                 Thank you in advanced for all your help,<br /><br />
                                 The Nguyen Family<br /><br />
                                 (click name to view image)<br />
@@ -53,16 +52,16 @@
                             <td class="td-candy"><span class="verticaltext show-candy" id="candy1">$18.90 - 1lb. Truffles (#902)</span></td>
                             <td class="td-candy"><span class="verticaltext show-candy" id="candy2">$16.50 - 1lb. Assorted Chocolates (#318)</span></td>
                             <td class="td-candy"><span class="verticaltext show-candy" id="candy3">$16.50 - 1lb. Milk Chocolates (#326)</span></td>
-                            <td class="td-candy"><span class="verticaltext show-candy" id="candy3">$16.50 - 1lb. Dark Chocolates (#330)</span></td>
-                            <td class="td-candy"><span class="verticaltext show-candy" id="candy4">$16.50 - 1lb. Nuts & Chews (#334)</span></td>
-                            <td class="td-candy"><span class="verticaltext show-candy" id="candy5">$16.50 - 1lb. Toffee-ettes (#316)</span></td>
-                            <td class="td-candy"><span class="verticaltext show-candy" id="candy6">$15.90 - 1lb. 8oz. Peanut Brittle (#355)</span></td>
-                            <td class="td-candy"><span class="verticaltext show-candy" id="candy7">$8.25 - 8oz. Assorted Molasses Chips (#360)</span></td>
-                            <td class="td-candy"><span class="verticaltext show-candy" id="candy8">$8.25 - 8oz. Peppermints (#358)</span></td>
-                            <td class="td-candy"><span class="verticaltext show-candy" id="candy9">$15.80 - 1lb. 5oz. Gourmet Lollypops (#296)</span></td>
-                            <td class="td-candy"><span class="verticaltext show-candy" id="candy10">$6.50 - 4oz. Jolly Snowman Box (#9127)</span></td>
-                            <td class="td-candy"><span class="verticaltext show-candy" id="candy11">$6.50 - 4oz. Mini Holiday Fancy Box (#596)</span></td>
-                            <td class="td-candy"><span class="verticaltext show-candy" id="candy12">$16.50 - 1lb. Gift Certificate (#767) US Only</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy4">$16.50 - 1lb. Dark Chocolates (#330)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy5">$16.50 - 1lb. Nuts & Chews (#334)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy6">$16.50 - 1lb. Toffee-ettes (#316)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy7">$15.90 - 1lb. 8oz. Peanut Brittle (#355)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy8">$8.25 - 8oz. Assorted Molasses Chips (#360)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy9">$8.25 - 8oz. Peppermints (#358)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy10">$15.80 - 1lb. 5oz. Gourmet Lollypops (#296)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy11">$6.50 - 4oz. Jolly Snowman Box (#9127)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy12">$6.50 - 4oz. Mini Holiday Fancy Box (#596)</span></td>
+                            <td class="td-candy"><span class="verticaltext show-candy" id="candy13">$16.50 - 1lb. Gift Certificate (#767) US Only</span></td>
                         </tr>
                         <tr style="border-bottom: 3px solid #373839;">
                             <td>Name &amp; Email</td>
@@ -137,6 +136,7 @@
                     </table>
                 </form>
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="pay-now" class="hidden" target="_parent">
+                <!--form action="http://fundraiser.thaiandhien.com/?id=" method="get" id="pay-now" class="hidden" target="_parent"-->
                     <input type="hidden" name="cmd" value="_xclick">
                     <input type="hidden" name="business" value="useEvil@gmail.com">
                     <input type="hidden" name="lc" value="US">
@@ -158,8 +158,19 @@
         <div id="footer">
           <div class="footer">&copy; Copyright 2011, Thai Nguyen.</div>
         </div>
+        <div id="notification" clas="hidden">
+            <div id="basic-template">
+                <a class="ui-notify-cross ui-notify-close" href="#"><img src="/static/images/close.png" width="24" /></a>
+                <h1>#{title}</h1>
+                <p>#{text}</p>
+            </div>
+            <div id="advanced-template">
+                <!-- ... you get the idea ... -->
+            </div>
+        </div>
     </body>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.notify.js"></script>
     <script type="text/javascript" src="/static/js/my-forms.js"></script>
 </html>
