@@ -10,7 +10,7 @@ def main(global_config, **settings):
     """
     engine = engine_from_config(settings, 'sqlalchemy.')
     initialize_sql(engine)
-    session_factory = UnencryptedCookieSessionFactoryConfig('abetterplacetoshop')
+    session_factory = UnencryptedCookieSessionFactoryConfig('jadlkfjalkdfjaldk3kj2032322')
     config = Configurator(settings=settings, session_factory = session_factory)
     config.add_static_view('static', 'myforms:static')
     config.add_route('index', '/', view='myforms.views.index', view_renderer='templates/index.pt')
